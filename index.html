@@ -5,50 +5,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lunex Inc - Global IT Solutions</title>
   <style>
+    /* Basic Styles */
     body {
       font-family: Arial, sans-serif;
       margin: 0; padding: 0;
       background-color: #f4f8f8;
       color: #333;
+      scroll-behavior: smooth;
+      transition: background-color 0.5s ease-in-out;
     }
+
+    /* Header */
     header {
-      background-color: #0b1a2b; /* dark navy + black */
+      background: linear-gradient(to right, #0b1a2b, #d94bb5); /* Navy Blue + Pink */
       color: white;
       padding: 20px;
-      text-align: center;
+      text-align: left;
+      padding-left: 40px;
     }
+
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+
+    /* Navigation Bar */
     nav {
-      background-color: #0b1a2b; /* same dark navy */
+      background-color: #0b1a2b;
       text-align: center;
       padding: 10px;
       position: sticky;
       top: 0;
       z-index: 100;
     }
+
     nav a {
       color: white;
       margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
-      cursor: pointer;
+      transition: color 0.3s ease;
     }
+
     nav a:hover {
+      color: #d94bb5;
       text-decoration: underline;
     }
+
+    /* Sections */
     section {
       max-width: 900px;
       margin: 40px auto;
       padding: 0 20px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.6s ease-out;
     }
+
+    section.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     h2 {
-      color: #0b1a2b; /* match header/nav color */
+      color: #0b1a2b;
       border-bottom: 2px solid #0b1a2b;
       padding-bottom: 8px;
     }
+
     ul {
       list-style: none;
       padding: 0;
     }
+
     ul li {
       background: white;
       margin: 10px 0;
@@ -57,6 +86,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       font-size: 1.1em;
     }
+
     /* Contact Form */
     form {
       background: white;
@@ -64,6 +94,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       border-radius: 6px;
     }
+
     form input, form textarea {
       width: 100%;
       padding: 12px;
@@ -73,6 +104,7 @@
       font-size: 1em;
       resize: vertical;
     }
+
     form button {
       background-color: #0b1a2b;
       color: white;
@@ -81,10 +113,13 @@
       font-size: 1em;
       border-radius: 4px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
+
     form button:hover {
-      background-color: #081423; /* slightly darker */
+      background-color: #081423;
     }
+
     #loader {
       display: none;
       text-align: center;
@@ -92,6 +127,7 @@
       color: #0b1a2b;
       font-weight: bold;
     }
+
     /* Footer */
     footer {
       background-color: #081423;
@@ -100,7 +136,8 @@
       padding: 20px;
       margin-top: 60px;
     }
-    /* Map container */
+
+    /* Map */
     #map iframe {
       width: 100%;
       height: 400px;
@@ -166,6 +203,7 @@
     📞 +1 (227) 204-9578 | 📧 <a href="mailto:prash8687@gmail.com" style="color: #aad4ff;">prash8687@gmail.com</a>
   </footer>
 
+  <!-- EmailJS Script -->
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
     emailjs.init("cmq8Rtphvl8EkYlrh"); // Replace with your EmailJS public key
@@ -191,6 +229,25 @@
             loader.style.display = 'none';
           }, 3000);
         });
+    });
+  </script>
+
+  <!-- Scroll Animation Script -->
+  <script>
+    const sections = document.querySelectorAll('section');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    sections.forEach(section => {
+      observer.observe(section);
     });
   </script>
 
