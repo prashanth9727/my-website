@@ -5,19 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lunex Inc - Global IT Solutions</title>
   <style>
-    /* Basic Styles */
     body {
       font-family: Arial, sans-serif;
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       background-color: #f4f8f8;
       color: #333;
       scroll-behavior: smooth;
       transition: background-color 0.5s ease-in-out;
     }
 
-    /* Header */
     header {
-      background: linear-gradient(to right, #0b1a2b, #d94bb5); /* Navy Blue + Pink */
+      background: linear-gradient(to right, #0b1a2b, #d94bb5);
       color: white;
       padding: 20px;
       text-align: left;
@@ -29,7 +28,6 @@
       font-size: 2em;
     }
 
-    /* Navigation Bar */
     nav {
       background-color: #0b1a2b;
       text-align: center;
@@ -52,7 +50,6 @@
       text-decoration: underline;
     }
 
-    /* Sections */
     section {
       max-width: 900px;
       margin: 40px auto;
@@ -85,6 +82,23 @@
       border-left: 6px solid #0b1a2b;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       font-size: 1.1em;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      font-size: 1em;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    th {
+      background-color: #0b1a2b;
+      color: white;
     }
 
     /* Contact Form */
@@ -128,7 +142,6 @@
       font-weight: bold;
     }
 
-    /* Footer */
     footer {
       background-color: #081423;
       color: white;
@@ -137,7 +150,6 @@
       margin-top: 60px;
     }
 
-    /* Map */
     #map iframe {
       width: 100%;
       height: 400px;
@@ -157,6 +169,7 @@
   <nav>
     <a href="#services">Services</a>
     <a href="#clients">Clients</a>
+    <a href="#academics">Academics</a>
     <a href="#contact">Contact</a>
   </nav>
 
@@ -180,6 +193,42 @@
     </ul>
   </section>
 
+  <section id="academics">
+    <h2>🎓 Academic & Global Support Services</h2>
+
+    <h3>📘 Assignments & Projects Help</h3>
+    <ul>
+      <li>University assignments and coursework</li>
+      <li>Capstone and final-year projects</li>
+      <li>Programming, data analysis, and design tasks</li>
+      <li>Plagiarism-free content with proper citations</li>
+    </ul>
+    <p><strong>💡 Fields we support:</strong> Computer Science, Business, Engineering, Healthcare, Social Sciences, and more.</p>
+
+    <h3>📚 Dissertation & Thesis Guidance</h3>
+    <ul>
+      <li>Topic selection and proposal writing</li>
+      <li>Literature review and methodology support</li>
+      <li>Data collection, analysis, and visualization</li>
+      <li>Proofreading, formatting, and plagiarism checks</li>
+    </ul>
+    <p><strong>🧠 Tools we use:</strong> SPSS, R, Python, NVivo, LaTeX, Grammarly</p>
+
+    <h3>🌍 Visa Application Assistance</h3>
+    <p>We guide students and professionals through visa processes for top destinations:</p>
+    <table>
+      <tr><th>Country</th><th>Support Offered</th></tr>
+      <tr><td>🇺🇸 United States</td><td>F-1 visa, OPT/CPT guidance, university selection</td></tr>
+      <tr><td>🇨🇦 Canada</td><td>Study permit, PGWP, college applications</td></tr>
+      <tr><td>🇬🇧 UK</td><td>Tier 4 visa, SOP writing, CAS support</td></tr>
+      <tr><td>🇦🇺 Australia</td><td>Subclass 500 visa, GTE statement help</td></tr>
+      <tr><td>🇩🇪 Germany</td><td>Student visa, blocked account, APS certificate</td></tr>
+      <tr><td>🇳🇿 New Zealand</td><td>Visa application, university matching</td></tr>
+      <tr><td>🇮🇪 Ireland</td><td>Study visa, course selection, financial docs</td></tr>
+    </table>
+    <p>✈️ We also assist with scholarships, SOPs, LORs, and interview preparation.</p>
+  </section>
+
   <section id="contact">
     <h2>Contact Us</h2>
     <form id="contact-form">
@@ -190,7 +239,7 @@
     </form>
     <div id="loader">⏳ Sending message...</div>
 
-    <div id="map" style="margin-top: 20px;">
+    <div id="map" style="margin-top: 40px;">
       <h2>📍 Our Location</h2>
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.0770808214413!2d-77.5269016!3d38.9023084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b6474a28ef7f3b%3A0xc3516e6ff7cbbfb5!2s2495%20Bannockburn%20Ter%2C%20Chantilly%2C%20VA%2020152%2C%20USA!5e0!3m2!1sen!2sus!4v1721587190235!5m2!1sen!2sus"
@@ -206,7 +255,7 @@
   <!-- EmailJS Script -->
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
-    emailjs.init("cmq8Rtphvl8EkYlrh"); // Replace with your EmailJS public key
+    emailjs.init("cmq8Rtphvl8EkYlrh");
 
     const form = document.getElementById('contact-form');
     const loader = document.getElementById('loader');
@@ -235,7 +284,6 @@
   <!-- Scroll Animation Script -->
   <script>
     const sections = document.querySelectorAll('section');
-
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -245,10 +293,7 @@
     }, {
       threshold: 0.1
     });
-
-    sections.forEach(section => {
-      observer.observe(section);
-    });
+    sections.forEach(section => observer.observe(section));
   </script>
 
 </body>
