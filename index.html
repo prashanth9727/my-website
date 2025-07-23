@@ -3,95 +3,113 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lunex Consult - Global IT & Academic Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Lunex.inc - Global IT Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #0b1a2b;
             --secondary-color: #d94bb5;
             --accent-color: #007bff;
-            --light-bg: #f8f9fa;
-            --dark-text: #343a40;
-            --light-text: #fefefe;
-            --border-color: #e0e0e0;
-            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-medium: 0 6px 18px rgba(0, 0, 0, 0.12);
+            --light-bg: #f4f8f8;
+            --dark-text: #333;
+            --light-text: white;
+            --border-color: #ccc;
+            --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--light-bg);
             color: var(--dark-text);
             scroll-behavior: smooth;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 100%; }
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #3a3b3c 100%);
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: var(--light-text);
-            padding: 60px 0;
+            padding: 40px 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent 70%);
-            transform: rotate(20deg);
-            pointer-events: none;
+            padding-left: 40px;
+            animation: fadeIn 1s ease-out; /* Header fade in */
         }
 
         header h1 {
             margin: 0;
-            font-size: 3.5em;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 2.8em;
+            letter-spacing: 1px;
+            animation: slideInUp 0.8s ease-out 0.2s forwards; /* Title animation */
+            opacity: 0; /* Start hidden */
         }
 
         header p {
-            font-size: 1.3em;
+            font-size: 1.2em;
             margin-top: 10px;
-            font-weight: 300;
+            animation: slideInUp 0.8s ease-out 0.4s forwards; /* Subtitle animation */
+            opacity: 0; /* Start hidden */
         }
 
         nav {
             background-color: var(--primary-color);
             text-align: center;
-            padding: 15px 0;
+            padding: 10px 0;
             position: sticky;
             top: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow-medium);
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         nav a {
             color: var(--light-text);
-            margin: 0 20px;
+            margin: 0 18px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: bold;
             transition: color 0.3s ease, transform 0.3s ease;
             position: relative;
+            display: inline-block; /* Required for transform */
         }
 
         nav a::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 3px;
+            height: 2px;
             background-color: var(--secondary-color);
-            bottom: -8px;
+            bottom: -5px;
             left: 50%;
             transform: translateX(-50%);
             transition: width 0.3s ease;
@@ -103,24 +121,19 @@
 
         nav a:hover {
             color: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 25px;
+            transform: translateY(-2px); /* Slight lift on hover */
         }
 
         section {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px;
             background: white;
-            padding: 50px;
-            margin-bottom: 40px;
-            border-radius: 15px;
+            border-radius: 10px;
             box-shadow: var(--shadow-light);
             opacity: 0;
             transform: translateY(40px);
-            transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: all 0.6s ease-out;
         }
 
         section.active {
@@ -130,32 +143,20 @@
 
         h2 {
             color: var(--primary-color);
-            font-size: 2.5em;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
             margin-bottom: 30px;
             text-align: center;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--secondary-color);
-            border-radius: 2px;
+            animation: slideInUp 0.7s ease-out; /* H2 animation */
         }
 
         h3 {
             color: var(--accent-color);
-            font-size: 1.8em;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            border-left: 5px solid var(--secondary-color);
-            padding-left: 15px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 10px;
+            animation: slideInLeft 0.7s ease-out; /* H3 animation */
         }
 
         ul {
@@ -167,62 +168,77 @@
             background: var(--light-bg);
             margin: 12px 0;
             padding: 18px 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            font-size: 1.1em;
             border-left: 6px solid var(--accent-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            font-size: 1.1em;
+            border-radius: 8px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.8s ease-out forwards; /* List item fade in */
+            opacity: 0; /* Start hidden */
+        }
+
+        ul li:nth-child(even) {
+            border-left-color: var(--secondary-color); /* Alternate border color */
         }
 
         ul li:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-medium);
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Stronger shadow on hover */
+            animation: none; /* Stop pulse on hover if it was active */
         }
+
+        /* Animation delay for list items (staggered effect) */
+        #services ul li:nth-child(1) { animation-delay: 0.1s; }
+        #services ul li:nth-child(2) { animation-delay: 0.2s; }
+        #services ul li:nth-child(3) { animation-delay: 0.3s; }
+        #services ul li:nth-child(4) { animation-delay: 0.4s; }
+        #services ul li:nth-child(5) { animation-delay: 0.5s; }
+        /* Continue for other sections' lists if needed */
 
         table {
             width: 100%;
-            margin-top: 30px;
-            border-collapse: separate; /* Changed to separate */
-            border-spacing: 0; /* Remove spacing */
+            margin-top: 25px;
+            border-collapse: collapse;
             font-size: 1em;
-            border-radius: 10px;
-            overflow: hidden; /* Ensures rounded corners apply */
-            box-shadow: var(--shadow-light);
+            animation: fadeIn 1s ease-out; /* Table fade in */
         }
 
         table, th, td {
-            border: none; /* Removed individual borders */
-            padding: 15px;
-            text-align: left;
+            border: 1px solid var(--border-color);
+            padding: 12px;
         }
 
         th {
             background-color: var(--primary-color);
-            color: white;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: var(--light-text);
+            animation: slideInUp 0.7s ease-out; /* Table header animation */
         }
 
+        tr {
+            transition: background-color 0.3s ease;
+        }
         tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: #f9f9f9;
         }
-
         tr:hover {
-            background-color: #e9ecef;
+            background-color: #eef;
         }
 
         /* Contact Form */
         form {
-            display: grid;
-            gap: 20px;
+            background: white;
+            padding: 30px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            animation: slideInUp 0.8s ease-out; /* Form animation */
         }
 
         form input, form textarea {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
+            margin: 10px 0 20px 0;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 1em;
             resize: vertical;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -238,78 +254,82 @@
             background-color: var(--primary-color);
             color: var(--light-text);
             border: none;
-            padding: 15px 30px;
-            font-size: 1.1em;
-            border-radius: 8px;
+            padding: 14px 30px;
+            font-size: 1.05em;
+            border-radius: 6px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
-            justify-self: start; /* Align button to start */
+            animation: pulse 1.5s infinite ease-in-out; /* Pulse effect on button */
         }
 
         form button:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
+            background-color: #081423;
+            transform: translateY(-2px) scale(1.02);
+            animation: none; /* Stop pulse on hover */
         }
 
         #loader {
             display: none;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
             color: var(--primary-color);
             font-weight: bold;
             font-size: 1.1em;
+            animation: fadeIn 0.5s ease-out; /* Loader fade in */
         }
 
         footer {
-            background-color: var(--primary-color);
+            background-color: #081423;
             color: var(--light-text);
             text-align: center;
-            padding: 30px;
-            margin-top: 60px;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
+            padding: 25px;
+            margin-top: 50px;
+            animation: fadeIn 1s ease-out; /* Footer fade in */
         }
 
         footer a {
-            color: var(--secondary-color);
+            color: #aad4ff;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         footer a:hover {
-            color: var(--light-text);
+            color: var(--secondary-color);
             text-decoration: underline;
         }
 
         #map iframe {
             width: 100%;
-            height: 450px;
+            height: 400px;
             border: 0;
-            border-radius: 15px;
-            box-shadow: var(--shadow-medium);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             margin-top: 30px;
+            animation: fadeIn 1s ease-out; /* Map fade in */
         }
 
         .whatsapp-float {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 25px;
+            right: 25px;
             z-index: 1000;
         }
 
         .whatsapp-float img {
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             background-color: #25D366;
-            padding: 12px;
+            padding: 10px;
             border-radius: 50%;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.35);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: pulse 2s infinite ease-in-out; /* Subtle pulse on WhatsApp button */
         }
 
         .whatsapp-float:hover img {
             background-color: #128C7E;
-            transform: scale(1.15) rotate(5deg);
+            transform: scale(1.1) rotate(5deg);
+            animation: none; /* Stop pulse on hover */
         }
     </style>
 </head>
@@ -317,7 +337,7 @@
 
     <header>
         <h1>🌐 Lunex Consult</h1>
-        <p>Innovating Your Digital & Academic Future</p>
+        <p>Innovating Your Digital Future</p>
     </header>
 
     <nav>
@@ -327,131 +347,126 @@
         <a href="#contact">Contact</a>
     </nav>
 
-    <div class="container">
-        <section id="services">
-            <h2>🏆 Our Specialized Services</h2>
-            <h3>✏️ Coursework & Exam Preparation</h3>
+    <section id="services">
+        <h2>🏆 Specialized Academic Services</h2>
+
+        <h3>✏️ Coursework & Exam Prep</h3>
+        <ul>
+            <li>Personalized tutoring in computer science, business, engineering, and medical subjects</li>
+            <li>Mock exams, quiz sets, and concept reviews for better retention</li>
+            <li>One-on-one and group sessions available online</li>
+        </ul>
+
+        <h3>🧪 Research & Publication Support</h3>
+        <ul>
+            <li>Journal submission guidance and formatting (APA, MLA, IEEE)</li>
+            <li>Help with peer review responses and manuscript editing</li>
+            <li>Assistance in identifying Scopus and SCI-indexed journals</li>
+        </ul>
+
+        <h3>👨‍🎓 Career & Study Abroad Guidance</h3>
+        <ul>
+            <li>Resume and CV building for academic and professional profiles</li>
+            <li>Cover letter and LinkedIn optimization</li>
+            <li>SOP and LOR writing tailored to universities in:</li>
             <ul>
-                <li>Personalized tutoring in computer science, business, engineering, and medical subjects.</li>
-                <li>Comprehensive mock exams, quiz sets, and detailed concept reviews for improved retention.</li>
-                <li>Flexible one-on-one and dynamic group sessions available online to fit your schedule.</li>
+                <li>🇺🇸 USA — Ivy League, public universities, and community colleges</li>
+                <li>🇨🇦 Canada — Colleges, U15 group, and regional universities</li>
+                <li>🇦🇺 Australia — Group of Eight, regional institutions</li>
+                <li>🇩🇪 Germany — TU9 universities and Fachhochschulen</li>
+                <li>🇬🇧 UK — Russell Group and UCAS applications</li>
+                <li>🇸🇬 Singapore — NUS, NTU, and private institutions</li>
+                <li>🇳🇱 Netherlands — English-taught programs at top Dutch universities</li>
             </ul>
+        </ul>
 
-            <h3>🧪 Research & Publication Support</h3>
-            <ul>
-                <li>Expert guidance on journal submission and meticulous formatting (APA, MLA, IEEE, Chicago).</li>
-                <li>Assistance with challenging peer review responses and professional manuscript editing.</li>
-                <li>Strategic identification of suitable Scopus and SCI-indexed journals for your research.</li>
-            </ul>
+        <h3>💼 Professional Services for Visa & Immigration</h3>
+        <ul>
+            <li>Resume tailoring and job application help for global markets</li>
+            <li>Support with work visas (H-1B, Tier 2, skilled migration)</li>
+            <li>Interview training and cultural orientation</li>
+        </ul>
 
-            <h3>👨‍🎓 Career & Study Abroad Guidance</h3>
-            <ul>
-                <li>Professional resume and CV building tailored for both academic and professional profiles.</li>
-                <li>Effective cover letter crafting and LinkedIn profile optimization for global opportunities.</li>
-                <li>Customized SOP (Statement of Purpose) and LOR (Letter of Recommendation) writing for top universities in:</li>
-                <ul>
-                    <li>🇺🇸 USA — Premier Ivy League, leading public universities, and career-focused community colleges.</li>
-                    <li>🇨🇦 Canada — Reputable colleges, U15 group research-intensive universities, and regional institutions.</li>
-                    <li>🇦🇺 Australia — Prestigious Group of Eight universities and accessible regional institutions.</li>
-                    <li>🇩🇪 Germany — Elite TU9 universities and practical-oriented Fachhochschulen.</li>
-                    <li>🇬🇧 UK — World-renowned Russell Group universities and comprehensive UCAS application support.</li>
-                    <li>🇸🇬 Singapore — Esteemed NUS, NTU, and high-quality private institutions.</li>
-                    <li>🇳🇱 Netherlands — Diverse range of English-taught programs at top Dutch universities.</li>
-                </ul>
-            </ul>
+        <h3>🤝 Why Work With Us?</h3>
+        <ul>
+            <li>✅ Proven track record with students across 6 continents</li>
+            <li>✅ Affordable and transparent pricing</li>
+            <li>✅ Quick turnaround and real-time updates</li>
+            <li>✅ Confidentiality and quality guaranteed</li>
+        </ul>
+    </section>
 
-            <h3>💼 Professional Services for Visa & Immigration</h3>
-            <ul>
-                <li>Strategic resume tailoring and targeted job application assistance for global markets.</li>
-                <li>Comprehensive support with various work visas (H-1B, Tier 2, skilled migration programs).</li>
-                <li>Personalized interview training and essential cultural orientation for smooth transitions.</li>
-            </ul>
+    <section id="clients">
+        <h2>Client Success Stories</h2>
+        <ul>
+            <li>🌍 USA: Financial Automation for a Major Bank</li>
+            <li>🇩🇪 Germany: SAP Implementation for Manufacturing</li>
+            <li>🇦🇺 Australia: Healthcare Reporting System</li>
+            <li>🇮🇳 India: Startup Scaling via BI Dashboards</li>
+        </ul>
+    </section>
 
-            <h3>🤝 Why Choose Lunex Consult?</h3>
-            <ul>
-                <li>✅ Proven track record of success with students and professionals across 6 continents.</li>
-                <li>✅ Transparent, affordable, and competitive pricing models.</li>
-                <li>✅ Rapid turnaround times and real-time project updates for your peace of mind.</li>
-                <li>✅ Strict confidentiality and uncompromised quality guaranteed in all our services.</li>
-            </ul>
-        </section>
+    <section id="academics">
+        <h2>🎓 Academic & Global Support Services</h2>
 
-        <section id="clients">
-            <h2>🌟 Client Success Stories</h2>
-            <ul>
-                <li>🌍 **USA**: Developed and implemented a cutting-edge Financial Automation solution for a Major Banking Corporation, streamlining operations and reducing manual errors by 30%.</li>
-                <li>🇩🇪 **Germany**: Led a successful end-to-end SAP Implementation for a prominent Manufacturing Giant, resulting in a 25% increase in production efficiency and supply chain optimization.</li>
-                <li>🇦🇺 **Australia**: Designed and deployed a robust Healthcare Reporting System for a leading Hospital Group, enhancing data accuracy and enabling faster clinical decision-making.</li>
-                <li>🇮🇳 **India**: Catalyzed a Tech Startup's growth by implementing dynamic Business Intelligence Dashboards, providing actionable insights that led to a 40% increase in user engagement and revenue.</li>
-            </ul>
-        </section>
+        <h3>📘 Assignments & Projects Help</h3>
+        <ul>
+            <li>University assignments and coursework</li>
+            <li>Capstone and final-year projects</li>
+            <li>Programming, data analysis, and design tasks</li>
+            <li>Plagiarism-free content with proper citations</li>
+        </ul>
+        <p><strong>💡 Fields we support:</strong> Computer Science, Business, Engineering, Healthcare, Social Sciences, and more.</p>
 
-        <section id="academics">
-            <h2>🎓 Academic & Global Support Services</h2>
+        <h3>📚 Dissertation & Thesis Guidance</h3>
+        <ul>
+            <li>Topic selection and proposal writing</li>
+            <li>Literature review and methodology support</li>
+            <li>Data collection, analysis, and visualization</li>
+            <li>Proofreading, formatting, and plagiarism checks</li>
+        </ul>
+        <p><strong>🧠 Tools we use:</strong> SPSS, R, Python, NVivo, LaTeX, Grammarly</p>
 
-            <h3>📘 Assignments & Projects Assistance</h3>
-            <ul>
-                <li>Comprehensive support for university assignments and challenging coursework across all disciplines.</li>
-                <li>Expert guidance for capstone and final-year projects, ensuring successful completion.</li>
-                <li>Hands-on assistance with programming, data analysis, and design tasks using industry-standard tools.</li>
-                <li>Guaranteed plagiarism-free content, meticulously researched and properly cited.</li>
-            </ul>
-            <p><strong>💡 Fields we support:</strong> Computer Science, Business Administration, all Engineering disciplines, Healthcare Management, Social Sciences, Humanities, and many more.</p>
+        <h3>🌍 Visa Application Assistance</h3>
+        <p>We guide students and professionals through visa processes for top destinations:</p>
+        <table>
+            <tr><th>Country</th><th>Support Offered</th></tr>
+            <tr><td>🇺🇸 United States</td><td>F-1 visa, OPT/CPT guidance, university selection</td></tr>
+            <tr><td>🇨🇦 Canada</td><td>Study permit, PGWP, college applications</td></tr>
+            <tr><td>🇬🇧 UK</td><td>Tier 4 visa, SOP writing, CAS support</td></tr>
+            <tr><td>🇦🇺 Australia</td><td>Subclass 500 visa, GTE statement help</td></tr>
+            <tr><td>🇩🇪 Germany</td><td>Student visa, blocked account, APS certificate</td></tr>
+            <tr><td>🇳🇿 New Zealand</td><td>Visa application, university matching</td></tr>
+            <tr><td>🇮🇪 Ireland</td><td>Study visa, course selection, financial docs</td></tr>
+        </table>
+        <p>✈️ We also assist with scholarships, SOPs, LORs, and interview preparation.</p>
+    </section>
 
-            <h3>📚 Dissertation & Thesis Guidance</h3>
-            <ul>
-                <li>Strategic topic selection and compelling proposal writing assistance.</li>
-                <li>Thorough literature review and robust methodology development support.</li>
-                <li>Comprehensive data collection, advanced analysis, and professional visualization services.</li>
-                <li>Meticulous proofreading, precise formatting, and rigorous plagiarism checks.</li>
-            </ul>
-            <p><strong>🧠 Tools we leverage:</strong> SPSS, R, Python, NVivo, LaTeX, Mendeley, Zotero, and Grammarly Premium.</p>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+            <input type="text" name="user_name" placeholder="Your Name" required />
+            <input type="email" name="user_email" placeholder="Your Email" required />
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <div id="loader">⏳ Sending message...</div>
 
-            <h3>🌍 Visa Application Assistance</h3>
-            <p>We provide expert guidance and support for students and professionals navigating visa processes for top global destinations:</p>
-            <table>
-                <thead>
-                    <tr><th>Country</th><th>Support Offered</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>🇺🇸 United States</td><td>F-1 student visa, OPT/CPT application guidance, strategic university selection.</td></tr>
-                    <tr><td>🇨🇦 Canada</td><td>Study permit application, Post-Graduation Work Permit (PGWP) assistance, comprehensive college applications.</td></tr>
-                    <tr><td>🇬🇧 UK</td><td>Tier 4 (General) student visa, compelling SOP writing, Confirmation of Acceptance for Studies (CAS) support.</td></tr>
-                    <tr><td>🇦🇺 Australia</td><td>Subclass 500 student visa, Genuine Temporary Entrant (GTE) statement help.</td></tr>
-                    <tr><td>🇩🇪 Germany</td><td>Student visa application, blocked account setup, Academic Recognition (APS) certificate assistance.</td></tr>
-                    <tr><td>🇳🇿 New Zealand</td><td>Streamlined visa application process, tailored university matching based on profile.</td></tr>
-                    <tr><td>🇮🇪 Ireland</td><td>Study visa guidance, optimal course selection, detailed financial documentation preparation.</td></tr>
-                </tbody>
-            </table>
-            <p>✈️ Beyond visa services, we also provide invaluable assistance with scholarship applications, compelling Statements of Purpose (SOPs), impactful Letters of Recommendation (LORs), and comprehensive interview preparation.</p>
-        </section>
-
-        <section id="contact">
-            <h2>📮 Get In Touch</h2>
-            <form id="contact-form">
-                <input type="text" name="user_name" placeholder="Your Name" required />
-                <input type="email" name="user_email" placeholder="Your Email" required />
-                <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
-            <div id="loader">⏳ Sending message...</div>
-
-            <div id="map">
-                <h2>📍 Our Global Presence</h2>
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3102.723223075252!2d-77.4589275846473!3d38.97405237955513!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b638b9d8853b01%3A0x6a0a0b6c6d0c7f1!2sSouth%20Riding%2C%20VA%2C%20USA!5e0!3m2!1sen!2sin!4v1678234567890!5m2!1sen!2sin"
-                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </section>
-    </div>
+        <div id="map">
+            <h2>📍 Our Location</h2>
+            <iframe
+                src="https://maps.google.com/?cid=17226764117464789643&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
 
     <a class="whatsapp-float" href="https://wa.me/12272049578" target="_blank" title="Chat with us on WhatsApp">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
     </a>
 
     <footer>
-        © 2018 Lunex Consult — All rights reserved.<br />
-        📞 <a href="tel:+12272049578">+1 (227) 204-9578</a> | 📧 <a href="mailto:prashanth@lunexconsult.com">prashanth@lunexconsult.com</a>
+        © 2018 Lunex Inc — All rights reserved.<br />
+        📞 +1 (227) 204-9578 | 📧 <a href="mailto:prashanth@lunexconsult.com" style="color: #aad4ff;">prashanth@lunexconsult.com</a>
     </footer>
 
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
@@ -489,15 +504,13 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    // Optional: Unobserve after activation if you only want the animation once
-                    // observer.unobserve(entry.target);
                 } else {
-                    // Optional: Remove 'active' if you want the animation to re-trigger on scroll back
+                    // Optional: remove 'active' to re-trigger animation when scrolling back up
                     // entry.target.classList.remove('active');
                 }
             });
         }, {
-            threshold: 0.1
+            threshold: 0.1 // Trigger when 10% of the section is visible
         });
         sections.forEach(section => observer.observe(section));
     </script>
