@@ -286,28 +286,37 @@
 
     
 
-<!-- WhatsApp Floating Button -->
-<a class="whatsapp-float" href="https://wa.me/12272049578" target="_blank" title="Chat with us on WhatsApp">💬</a>
+<<!-- WhatsApp Floating Button with Icon -->
+<a class="whatsapp-float" href="https://wa.me/12272049578" target="_blank" title="Chat with us on WhatsApp">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 40px; height: 40px;" />
+</a>
 
 <style>
   .whatsapp-float {
-    position: fixed;
+    position: absolute;
     bottom: 20px;
     right: 20px;
-    background: #25D366;
-    color: #fff;
-    padding: 12px 14px;
-    border-radius: 50%;
-    font-size: 24px;
     z-index: 1000;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    text-align: center;
-    text-decoration: none;
   }
-  .whatsapp-float:hover {
-    background: #128C7E;
+
+  .whatsapp-float img {
+    background-color: #25D366;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .whatsapp-float:hover img {
+    background-color: #128C7E;
+    transform: scale(1.1);
+  }
+
+  #map {
+    position: relative;
   }
 </style>
+
 
 
 
