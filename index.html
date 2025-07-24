@@ -59,8 +59,7 @@
             to { width: 100%; }
         }
 
-        /* 1. Universal Text Selection Highlight Fix */
-        /* This ensures that when you select text, it doesn't turn white on white */
+        /* 1. Universal Text Selection Highlight Fix (from previous attempt, good to keep) */
         ::selection {
             background: var(--accent-color); /* Visible background when text is selected */
             color: var(--light-text); /* Visible text color when text is selected */
@@ -206,7 +205,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.08);
             font-size: 1.1em;
             border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Added background-color and color to transition */
             animation: fadeIn 0.8s ease-out forwards; /* List item fade in */
             opacity: 0; /* Start hidden */
         }
@@ -215,11 +214,15 @@
             border-left-color: var(--secondary-color); /* Alternate border color */
         }
 
+        /* >>>>>> CRITICAL FIX FOR LIST ITEM HOVER <<<<<< */
         ul li:hover {
             transform: translateY(-5px); /* Lift effect on hover */
             box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Stronger shadow on hover */
             animation: none; /* Stop pulse on hover if it was active */
+            background-color: #e0e7ee !important; /* Force a slightly darker background (light blue-grey) */
+            color: var(--dark-text) !important; /* Force text to remain dark */
         }
+        /* >>>>>> END CRITICAL FIX <<<<<< */
 
         /* Animation delay for list items (staggered effect) */
         #services ul li:nth-child(1) { animation-delay: 0.1s; }
@@ -258,7 +261,7 @@
             background-color: #eef;
         }
 
-        /* 2. Defensive Rule for General Text Elements on Hover within Sections (light background) */
+        /* Defensive Rule for General Text Elements on Hover within Sections (light background) */
         /* This forces common text elements to remain dark when hovered over, preventing white-on-white */
         section p:hover,
         section span:hover,
@@ -267,12 +270,1173 @@
         section h1:hover, section h2:hover, section h3:hover,
         section table td:hover { /* Added table cells here too */
             color: var(--dark-text) !important; /* Forces text to remain dark */
-            /* If the background of these elements also becomes problematic on hover,
-               you might need to uncomment and adjust the line below. */
-            /* background-color: inherit !important; */
         }
 
-        /* 3. Ensure links within sections have clear hover state (they are on white background) */
+        /* Ensure links within sections have clear hover state (they are on white background) */
+        section a {
+            color: var(--accent-color); /* Default link color in sections */
+            text-decoration: underline; /* Makes them clearly links */
+        }
+        section a:hover {
+            color: var(--primary-color) !important; /* Change to a dark, distinct color on hover */
+            text-decoration: none; /* Remove underline on hover for a clean look */
+        }
+
+
+        /* Contact Form */
+        form {
+            background: white;
+            padding: 30px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            animation: slideInUp 0.8s ease-out; /* Form animation */
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0 20px 0;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1em;
+            resize: vertical;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        form input:focus, form textarea:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+
+        form button {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            border: none;
+            padding: 14px 30px;
+            font-size: 1.05em;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            animation: pulse 1.5s infinite ease-in-out; /* Pulse effect on button */
+        }
+
+        form button:hover {
+            background-color: #081423;
+            transform: translateY(-2px) scale(1.02);
+            animation: none; /* Stop pulse on hover */
+        }
+
+        #loader {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.1em;
+            animation: fadeIn 0.5s ease-out; /* Loader fade in */
+        }
+
+        footer {
+            background-color: #081423;
+            color: var(--light-text);
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+            animation: fadeIn 1s ease-out; /* Footer fade in */
+        }
+
+        footer a {
+            color: #aad4ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        #map iframe {
+            width: 100%;
+            height: 400px;
+            border: 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            animation: fadeIn 1s ease-out; /* Map fade in */
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+
+        .whatsapp-float img {
+            width: 50px;
+            height: 50px;
+            background-color: #25D366;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: pulse 2s infinite ease-in-out; /* Subtle pulse on WhatsApp button */
+        }
+
+        .whatsapp-float:hover img {
+            background-color: #128C7E;
+            transform: scale(1.1) rotate(5deg);
+            animation: none; /* Stop pulse on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="images/lunex-logo.png" alt="Lunex Consult Logo" class="company-logo">
+                <h1>Lunex Consult</h1>
+            </div>
+            <p>Innovating Your Digital Future</p>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#services">Services</a>
+        <a href="#clients">Clients</a>
+        <a href="#academics">Academics</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="services">
+        <h2>🏆 Specialized Academic Services</h2>
+
+        <h3>✏️ Coursework & Exam Prep</h3>
+        <ul>
+            <li>Personalized tutoring in computer science, business, engineering, and medical subjects</li>
+            <li>Mock exams, quiz sets, and concept reviews for better retention</li>
+            <li>One-on-one and group sessions available online</li>
+        </ul>
+
+        <h3>🧪 Research & Publication Support</h3>
+        <ul>
+            <li>Journal submission guidance and formatting (APA, MLA, IEEE)</li>
+            <li>Help with peer review responses and manuscript editing</li>
+            <li>Assistance in identifying Scopus and SCI-indexed journals</li>
+        </ul>
+
+        <h3>👨‍🎓 Career & Study Abroad Guidance</h3>
+        <ul>
+            <li>Resume and CV building for academic and professional profiles</li>
+            <li>Cover letter and LinkedIn optimization</li>
+            <li>SOP and LOR writing tailored to universities in:</li>
+            <ul>
+                <li>🇺🇸 USA — Ivy League, public universities, and community colleges</li>
+                <li>🇨🇦 Canada — Colleges, U15 group, and regional universities</li>
+                <li>🇦🇺 Australia — Group of Eight, regional institutions</li>
+                <li>🇩🇪 Germany — TU9 universities and Fachhochschulen</li>
+                <li>🇬🇧 UK — Russell Group and UCAS applications</li>
+                <li>🇸🇬 Singapore — NUS, NTU, and private institutions</li>
+                <li>🇳🇱 Netherlands — English-taught programs at top Dutch universities</li>
+            </ul>
+        </ul>
+
+        <h3>💼 Professional Services for Visa & Immigration</h3>
+        <ul>
+            <li>Resume tailoring and job application help for global markets</li>
+            <li>Support with work visas (H-1B, Tier 2, skilled migration)</li>
+            <li>Interview training and cultural orientation</li>
+        </ul>
+
+        <h3>🤝 Why Work With Us?</h3>
+        <ul>
+            <li>✅ Proven track record with students across 6 continents</li>
+            <li>✅ Affordable and transparent pricing</li>
+            <li>✅ Quick turnaround and real-time updates</li>
+            <li>✅ Confidentiality and quality guaranteed</li>
+        </ul>
+    </section>
+
+    <section id="clients">
+        <h2>Client Success Stories</h2>
+        <ul>
+            <li>🌍 USA: Financial Automation for a Major Bank</li>
+            <li>🇩🇪 Germany: SAP Implementation for Manufacturing</li>
+            <li>🇦🇺 Australia: Healthcare Reporting System</li>
+            <li>🇮🇳 India: Startup Scaling via BI Dashboards</li>
+        </ul>
+    </section>
+
+    <section id="academics">
+        <h2>🎓 Academic & Global Support Services</h2>
+
+        <h3>📘 Assignments & Projects Help</h3>
+        <ul>
+            <li>University assignments and coursework</li>
+            <li>Capstone and final-year projects</li>
+            <li>Programming, data analysis, and design tasks</li>
+            <li>Plagiarism-free content with proper citations</li>
+        </ul>
+        <p><strong>💡 Fields we support:</strong> Computer Science, Business, Engineering, Healthcare, Social Sciences, and more.</p>
+
+        <h3>📚 Dissertation & Thesis Guidance</h3>
+        <ul>
+            <li>Topic selection and proposal writing</li>
+            <li>Literature review and methodology support</li>
+            <li>Data collection, analysis, and visualization</li>
+            <li>Proofreading, formatting, and plagiarism checks</li>
+        </ul>
+        <p><strong>🧠 Tools we use:</strong> SPSS, R, Python, NVivo, LaTeX, Grammarly</p>
+
+        <h3>🌍 Visa Application Assistance</h3>
+        <p>We guide students and professionals through visa processes for top destinations:</p>
+        <table>
+            <tr><th>Country</th><th>Support Offered</th></tr>
+            <tr><td>🇺🇸 United States</td><td>F-1 visa, OPT/CPT guidance, university selection</td></tr>
+            <tr><td>🇨🇦 Canada</td><td>Study permit, PGWP, college applications</td></tr>
+            <tr><td>🇬🇧 UK</td><td>Tier 4 visa, SOP writing, CAS support</td></tr>
+            <tr><td>🇦🇺 Australia</td><td>Subclass 500 visa, GTE statement help</td></tr>
+            <tr><td>🇩🇪 Germany</td><td>Student visa, blocked account, APS certificate</td></tr>
+            <tr><td>🇳🇿 New Zealand</td><td>Visa application, university matching</td></tr>
+            <tr><td>🇮🇪 Ireland</td><td>Study visa, course selection, financial docs</td></tr>
+        </table>
+        <p>✈️ We also assist with scholarships, SOPs, LORs, and interview preparation.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+            <input type="text" name="user_name" placeholder="Your Name" required />
+            <input type="email" name="user_email" placeholder="Your Email" required />
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <div id="loader">⏳ Sending message...</div>
+
+        <div id="map">
+            <h2>📍 Our Location</h2>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3106.840244799793!2d-77.5615809236173!3d38.90372134547285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b6389762692095%3A0xc3f7a1f237ef39ce!2sBannockburn%20Ter%2C%20South%20Riding%2C%20VA%2020152!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <a class="whatsapp-float" href="https://wa.me/12272049578" target="_blank" title="Chat with us on WhatsApp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+    </a>
+
+    <footer>
+        © 2018 Lunex Inc — All rights reserved.<br />
+        📞 +1 (227) 204-9578 | 📧 <a href="mailto:prashanth@lunexconsult.com" style="color: #aad4ff;">prashanth@lunexconsult.com</a>
+    </footer>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        emailjs.init("cmq8Rtphvl8EkYlrh"); // Replace with your actual EmailJS User ID
+
+        const form = document.getElementById('contact-form');
+        const loader = document.getElementById('loader');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            loader.style.display = 'block';
+            loader.textContent = '⏳ Sending message...'; // Reset loader text
+
+            emailjs.sendForm('service_y3ukzb9', 'template_i0nzvaj', this) // Replace with your EmailJS Service ID and Template ID
+                .then(() => {
+                    loader.textContent = '✅ Sent! Thank you.';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        form.reset();
+                    }, 3000);
+                }, (error) => {
+                    loader.textContent = '❌ Failed to send. Please try again.';
+                    console.error('EmailJS error:', error);
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 3000);
+                });
+        });
+    </script>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    // Optional: remove 'active' to re-trigger animation when scrolling back up
+                    // entry.target.classList.remove('active');
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the section is visible
+        });
+        sections.forEach(section => observer.observe(section));
+    </script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lunex Consult - Global IT Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0b1a2b;
+            --secondary-color: #d94bb5;
+            --accent-color: #007bff;
+            --light-bg: #f4f8f8;
+            --dark-text: #333;
+            --light-text: white;
+            --border-color: #ccc;
+            --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* 1. Universal Text Selection Highlight Fix (from previous attempt, good to keep) */
+        ::selection {
+            background: var(--accent-color); /* Visible background when text is selected */
+            color: var(--light-text); /* Visible text color when text is selected */
+        }
+        ::-moz-selection { /* For Firefox */
+            background: var(--accent-color);
+            color: var(--light-text);
+        }
+
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: var(--light-text);
+            padding: 40px 0; /* Adjust vertical padding */
+            animation: fadeIn 1s ease-out; /* Header fade in */
+        }
+
+        .header-content {
+            max-width: 1000px; /* Adjusted for better alignment */
+            margin: 0 auto;
+            padding: 0 25px; /* Consistent with section padding */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Aligns content to the left */
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center; /* Vertically align logo and title */
+            gap: 15px; /* Space between logo and title */
+            margin-bottom: 10px; /* Space between logo/title and subtitle */
+        }
+
+        .company-logo {
+            height: 120px; /* Adjust size as needed, e.g., 70px, 100px, 120px */
+            width: auto; /* Maintains aspect ratio */
+            animation: fadeIn 1s ease-out 0.1s forwards; /* Logo fade in */
+            opacity: 0; /* Start hidden */
+        }
+
+        header h1 {
+            margin: 0; /* Reset margin from previous H1 styles */
+            font-size: 2.8em; /* Keep original font size */
+            text-align: left; /* Ensure title is left-aligned */
+            animation: slideInLeft 0.8s ease-out 0.2s forwards; /* Title animation from left */
+            opacity: 0; /* Start hidden */
+        }
+
+        header p {
+            font-size: 1.2em;
+            text-align: left; /* Ensure subtitle is left-aligned */
+            margin-top: 0; /* Adjust as needed, controlled by .logo-container margin-bottom */
+            animation: slideInLeft 0.8s ease-out 0.4s forwards; /* Subtitle animation from left */
+            opacity: 0; /* Start hidden */
+        }
+
+
+        nav {
+            background-color: var(--primary-color);
+            text-align: center;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        nav a {
+            color: var(--light-text);
+            margin: 0 18px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            display: inline-block; /* Required for transform */
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        section {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.6s ease-out;
+        }
+
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: slideInUp 0.7s ease-out; /* H2 animation */
+        }
+
+        h3 {
+            color: var(--accent-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 10px;
+            animation: slideInLeft 0.7s ease-out; /* H3 animation */
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            background: var(--light-bg);
+            margin: 12px 0;
+            padding: 18px 25px;
+            border-left: 6px solid var(--accent-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            font-size: 1.1em;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Added background-color and color to transition */
+            animation: fadeIn 0.8s ease-out forwards; /* List item fade in */
+            opacity: 0; /* Start hidden */
+        }
+
+        ul li:nth-child(even) {
+            border-left-color: var(--secondary-color); /* Alternate border color */
+        }
+
+        /* >>>>>> CRITICAL FIX FOR LIST ITEM HOVER <<<<<< */
+        ul li:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Stronger shadow on hover */
+            animation: none; /* Stop pulse on hover if it was active */
+            background-color: #e0e7ee !important; /* Force a slightly darker background (light blue-grey) */
+            color: var(--dark-text) !important; /* Force text to remain dark */
+        }
+        /* >>>>>> END CRITICAL FIX <<<<<< */
+
+        /* Animation delay for list items (staggered effect) */
+        #services ul li:nth-child(1) { animation-delay: 0.1s; }
+        #services ul li:nth-child(2) { animation-delay: 0.2s; }
+        #services ul li:nth-child(3) { animation-delay: 0.3s; }
+        #services ul li:nth-child(4) { animation-delay: 0.4s; }
+        #services ul li:nth-child(5) { animation-delay: 0.5s; }
+        /* Continue for other sections' lists if needed */
+
+        table {
+            width: 100%;
+            margin-top: 25px;
+            border-collapse: collapse;
+            font-size: 1em;
+            animation: fadeIn 1s ease-out; /* Table fade in */
+        }
+
+        table, th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            animation: slideInUp 0.7s ease-out; /* Table header animation */
+        }
+
+        tr {
+            transition: background-color 0.3s ease;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #eef;
+        }
+
+        /* Defensive Rule for General Text Elements on Hover within Sections (light background) */
+        /* This forces common text elements to remain dark when hovered over, preventing white-on-white */
+        section p:hover,
+        section span:hover,
+        section strong:hover,
+        section em:hover,
+        section h1:hover, section h2:hover, section h3:hover,
+        section table td:hover { /* Added table cells here too */
+            color: var(--dark-text) !important; /* Forces text to remain dark */
+        }
+
+        /* Ensure links within sections have clear hover state (they are on white background) */
+        section a {
+            color: var(--accent-color); /* Default link color in sections */
+            text-decoration: underline; /* Makes them clearly links */
+        }
+        section a:hover {
+            color: var(--primary-color) !important; /* Change to a dark, distinct color on hover */
+            text-decoration: none; /* Remove underline on hover for a clean look */
+        }
+
+
+        /* Contact Form */
+        form {
+            background: white;
+            padding: 30px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            animation: slideInUp 0.8s ease-out; /* Form animation */
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0 20px 0;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1em;
+            resize: vertical;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        form input:focus, form textarea:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+
+        form button {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            border: none;
+            padding: 14px 30px;
+            font-size: 1.05em;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            animation: pulse 1.5s infinite ease-in-out; /* Pulse effect on button */
+        }
+
+        form button:hover {
+            background-color: #081423;
+            transform: translateY(-2px) scale(1.02);
+            animation: none; /* Stop pulse on hover */
+        }
+
+        #loader {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.1em;
+            animation: fadeIn 0.5s ease-out; /* Loader fade in */
+        }
+
+        footer {
+            background-color: #081423;
+            color: var(--light-text);
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+            animation: fadeIn 1s ease-out; /* Footer fade in */
+        }
+
+        footer a {
+            color: #aad4ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        #map iframe {
+            width: 100%;
+            height: 400px;
+            border: 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            animation: fadeIn 1s ease-out; /* Map fade in */
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+
+        .whatsapp-float img {
+            width: 50px;
+            height: 50px;
+            background-color: #25D366;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: pulse 2s infinite ease-in-out; /* Subtle pulse on WhatsApp button */
+        }
+
+        .whatsapp-float:hover img {
+            background-color: #128C7E;
+            transform: scale(1.1) rotate(5deg);
+            animation: none; /* Stop pulse on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="images/lunex-logo.png" alt="Lunex Consult Logo" class="company-logo">
+                <h1>Lunex Consult</h1>
+            </div>
+            <p>Innovating Your Digital Future</p>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#services">Services</a>
+        <a href="#clients">Clients</a>
+        <a href="#academics">Academics</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="services">
+        <h2>🏆 Specialized Academic Services</h2>
+
+        <h3>✏️ Coursework & Exam Prep</h3>
+        <ul>
+            <li>Personalized tutoring in computer science, business, engineering, and medical subjects</li>
+            <li>Mock exams, quiz sets, and concept reviews for better retention</li>
+            <li>One-on-one and group sessions available online</li>
+        </ul>
+
+        <h3>🧪 Research & Publication Support</h3>
+        <ul>
+            <li>Journal submission guidance and formatting (APA, MLA, IEEE)</li>
+            <li>Help with peer review responses and manuscript editing</li>
+            <li>Assistance in identifying Scopus and SCI-indexed journals</li>
+        </ul>
+
+        <h3>👨‍🎓 Career & Study Abroad Guidance</h3>
+        <ul>
+            <li>Resume and CV building for academic and professional profiles</li>
+            <li>Cover letter and LinkedIn optimization</li>
+            <li>SOP and LOR writing tailored to universities in:</li>
+            <ul>
+                <li>🇺🇸 USA — Ivy League, public universities, and community colleges</li>
+                <li>🇨🇦 Canada — Colleges, U15 group, and regional universities</li>
+                <li>🇦🇺 Australia — Group of Eight, regional institutions</li>
+                <li>🇩🇪 Germany — TU9 universities and Fachhochschulen</li>
+                <li>🇬🇧 UK — Russell Group and UCAS applications</li>
+                <li>🇸🇬 Singapore — NUS, NTU, and private institutions</li>
+                <li>🇳🇱 Netherlands — English-taught programs at top Dutch universities</li>
+            </ul>
+        </ul>
+
+        <h3>💼 Professional Services for Visa & Immigration</h3>
+        <ul>
+            <li>Resume tailoring and job application help for global markets</li>
+            <li>Support with work visas (H-1B, Tier 2, skilled migration)</li>
+            <li>Interview training and cultural orientation</li>
+        </ul>
+
+        <h3>🤝 Why Work With Us?</h3>
+        <ul>
+            <li>✅ Proven track record with students across 6 continents</li>
+            <li>✅ Affordable and transparent pricing</li>
+            <li>✅ Quick turnaround and real-time updates</li>
+            <li>✅ Confidentiality and quality guaranteed</li>
+        </ul>
+    </section>
+
+    <section id="clients">
+        <h2>Client Success Stories</h2>
+        <ul>
+            <li>🌍 USA: Financial Automation for a Major Bank</li>
+            <li>🇩🇪 Germany: SAP Implementation for Manufacturing</li>
+            <li>🇦🇺 Australia: Healthcare Reporting System</li>
+            <li>🇮🇳 India: Startup Scaling via BI Dashboards</li>
+        </ul>
+    </section>
+
+    <section id="academics">
+        <h2>🎓 Academic & Global Support Services</h2>
+
+        <h3>📘 Assignments & Projects Help</h3>
+        <ul>
+            <li>University assignments and coursework</li>
+            <li>Capstone and final-year projects</li>
+            <li>Programming, data analysis, and design tasks</li>
+            <li>Plagiarism-free content with proper citations</li>
+        </ul>
+        <p><strong>💡 Fields we support:</strong> Computer Science, Business, Engineering, Healthcare, Social Sciences, and more.</p>
+
+        <h3>📚 Dissertation & Thesis Guidance</h3>
+        <ul>
+            <li>Topic selection and proposal writing</li>
+            <li>Literature review and methodology support</li>
+            <li>Data collection, analysis, and visualization</li>
+            <li>Proofreading, formatting, and plagiarism checks</li>
+        </ul>
+        <p><strong>🧠 Tools we use:</strong> SPSS, R, Python, NVivo, LaTeX, Grammarly</p>
+
+        <h3>🌍 Visa Application Assistance</h3>
+        <p>We guide students and professionals through visa processes for top destinations:</p>
+        <table>
+            <tr><th>Country</th><th>Support Offered</th></tr>
+            <tr><td>🇺🇸 United States</td><td>F-1 visa, OPT/CPT guidance, university selection</td></tr>
+            <tr><td>🇨🇦 Canada</td><td>Study permit, PGWP, college applications</td></tr>
+            <tr><td>🇬🇧 UK</td><td>Tier 4 visa, SOP writing, CAS support</td></tr>
+            <tr><td>🇦🇺 Australia</td><td>Subclass 500 visa, GTE statement help</td></tr>
+            <tr><td>🇩🇪 Germany</td><td>Student visa, blocked account, APS certificate</td></tr>
+            <tr><td>🇳🇿 New Zealand</td><td>Visa application, university matching</td></tr>
+            <tr><td>🇮🇪 Ireland</td><td>Study visa, course selection, financial docs</td></tr>
+        </table>
+        <p>✈️ We also assist with scholarships, SOPs, LORs, and interview preparation.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+            <input type="text" name="user_name" placeholder="Your Name" required />
+            <input type="email" name="user_email" placeholder="Your Email" required />
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <div id="loader">⏳ Sending message...</div>
+
+        <div id="map">
+            <h2>📍 Our Location</h2>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3106.840244799793!2d-77.5615809236173!3d38.90372134547285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b6389762692095%3A0xc3f7a1f237ef39ce!2sBannockburn%20Ter%2C%20South%20Riding%2C%20VA%2020152!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <a class="whatsapp-float" href="https://wa.me/12272049578" target="_blank" title="Chat with us on WhatsApp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+    </a>
+
+    <footer>
+        © 2018 Lunex Inc — All rights reserved.<br />
+        📞 +1 (227) 204-9578 | 📧 <a href="mailto:prashanth@lunexconsult.com" style="color: #aad4ff;">prashanth@lunexconsult.com</a>
+    </footer>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        emailjs.init("cmq8Rtphvl8EkYlrh"); // Replace with your actual EmailJS User ID
+
+        const form = document.getElementById('contact-form');
+        const loader = document.getElementById('loader');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            loader.style.display = 'block';
+            loader.textContent = '⏳ Sending message...'; // Reset loader text
+
+            emailjs.sendForm('service_y3ukzb9', 'template_i0nzvaj', this) // Replace with your EmailJS Service ID and Template ID
+                .then(() => {
+                    loader.textContent = '✅ Sent! Thank you.';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        form.reset();
+                    }, 3000);
+                }, (error) => {
+                    loader.textContent = '❌ Failed to send. Please try again.';
+                    console.error('EmailJS error:', error);
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 3000);
+                });
+        });
+    </script>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    // Optional: remove 'active' to re-trigger animation when scrolling back up
+                    // entry.target.classList.remove('active');
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the section is visible
+        });
+        sections.forEach(section => observer.observe(section));
+    </script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lunex Consult - Global IT Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0b1a2b;
+            --secondary-color: #d94bb5;
+            --accent-color: #007bff;
+            --light-bg: #f4f8f8;
+            --dark-text: #333;
+            --light-text: white;
+            --border-color: #ccc;
+            --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* 1. Universal Text Selection Highlight Fix (from previous attempt, good to keep) */
+        ::selection {
+            background: var(--accent-color); /* Visible background when text is selected */
+            color: var(--light-text); /* Visible text color when text is selected */
+        }
+        ::-moz-selection { /* For Firefox */
+            background: var(--accent-color);
+            color: var(--light-text);
+        }
+
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: var(--light-text);
+            padding: 40px 0; /* Adjust vertical padding */
+            animation: fadeIn 1s ease-out; /* Header fade in */
+        }
+
+        .header-content {
+            max-width: 1000px; /* Adjusted for better alignment */
+            margin: 0 auto;
+            padding: 0 25px; /* Consistent with section padding */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Aligns content to the left */
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center; /* Vertically align logo and title */
+            gap: 15px; /* Space between logo and title */
+            margin-bottom: 10px; /* Space between logo/title and subtitle */
+        }
+
+        .company-logo {
+            height: 120px; /* Adjust size as needed, e.g., 70px, 100px, 120px */
+            width: auto; /* Maintains aspect ratio */
+            animation: fadeIn 1s ease-out 0.1s forwards; /* Logo fade in */
+            opacity: 0; /* Start hidden */
+        }
+
+        header h1 {
+            margin: 0; /* Reset margin from previous H1 styles */
+            font-size: 2.8em; /* Keep original font size */
+            text-align: left; /* Ensure title is left-aligned */
+            animation: slideInLeft 0.8s ease-out 0.2s forwards; /* Title animation from left */
+            opacity: 0; /* Start hidden */
+        }
+
+        header p {
+            font-size: 1.2em;
+            text-align: left; /* Ensure subtitle is left-aligned */
+            margin-top: 0; /* Adjust as needed, controlled by .logo-container margin-bottom */
+            animation: slideInLeft 0.8s ease-out 0.4s forwards; /* Subtitle animation from left */
+            opacity: 0; /* Start hidden */
+        }
+
+
+        nav {
+            background-color: var(--primary-color);
+            text-align: center;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        nav a {
+            color: var(--light-text);
+            margin: 0 18px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            display: inline-block; /* Required for transform */
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        section {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.6s ease-out;
+        }
+
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: slideInUp 0.7s ease-out; /* H2 animation */
+        }
+
+        h3 {
+            color: var(--accent-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 10px;
+            animation: slideInLeft 0.7s ease-out; /* H3 animation */
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            background: var(--light-bg);
+            margin: 12px 0;
+            padding: 18px 25px;
+            border-left: 6px solid var(--accent-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            font-size: 1.1em;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Added background-color and color to transition */
+            animation: fadeIn 0.8s ease-out forwards; /* List item fade in */
+            opacity: 0; /* Start hidden */
+        }
+
+        ul li:nth-child(even) {
+            border-left-color: var(--secondary-color); /* Alternate border color */
+        }
+
+        /* >>>>>> CRITICAL FIX FOR LIST ITEM HOVER <<<<<< */
+        ul li:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Stronger shadow on hover */
+            animation: none; /* Stop pulse on hover if it was active */
+            background-color: #e0e7ee !important; /* Force a slightly darker background (light blue-grey) */
+            color: var(--dark-text) !important; /* Force text to remain dark */
+        }
+        /* >>>>>> END CRITICAL FIX <<<<<< */
+
+        /* Animation delay for list items (staggered effect) */
+        #services ul li:nth-child(1) { animation-delay: 0.1s; }
+        #services ul li:nth-child(2) { animation-delay: 0.2s; }
+        #services ul li:nth-child(3) { animation-delay: 0.3s; }
+        #services ul li:nth-child(4) { animation-delay: 0.4s; }
+        #services ul li:nth-child(5) { animation-delay: 0.5s; }
+        /* Continue for other sections' lists if needed */
+
+        table {
+            width: 100%;
+            margin-top: 25px;
+            border-collapse: collapse;
+            font-size: 1em;
+            animation: fadeIn 1s ease-out; /* Table fade in */
+        }
+
+        table, th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            animation: slideInUp 0.7s ease-out; /* Table header animation */
+        }
+
+        tr {
+            transition: background-color 0.3s ease;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #eef;
+        }
+
+        /* Defensive Rule for General Text Elements on Hover within Sections (light background) */
+        /* This forces common text elements to remain dark when hovered over, preventing white-on-white */
+        section p:hover,
+        section span:hover,
+        section strong:hover,
+        section em:hover,
+        section h1:hover, section h2:hover, section h3:hover,
+        section table td:hover { /* Added table cells here too */
+            color: var(--dark-text) !important; /* Forces text to remain dark */
+        }
+
+        /* Ensure links within sections have clear hover state (they are on white background) */
         section a {
             color: var(--accent-color); /* Default link color in sections */
             text-decoration: underline; /* Makes them clearly links */
