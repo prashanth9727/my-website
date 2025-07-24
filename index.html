@@ -283,7 +283,19 @@
             text-decoration: none; /* Remove underline on hover for a clean look */
         }
 
+/* Assignment contact form EmailJS */
+<script type="text/javascript"
+  src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="text/javascript">
+  (function() {
+    emailjs.init("cmq8Rtphvl8EkYlrh"); // Replace with your EmailJS public key
+  })();
+</script>
 
+
+
+
+        
         /* Contact Form */
         form {
             background: white;
@@ -466,31 +478,54 @@
     
 
   <!-- Your Assignment Section -->
-  <section id="assignment-services" style="padding: 30px; background-color: #111;">
-    <h2 style="color: #00ffcc;">Assignment Services Inquiry</h2>
-    <form action="https://formsubmit.co/prash8687@gmail.com" method="POST" enctype="multipart/form-data" style="max-width: 400px; margin: auto; background: #1a1a2e; padding: 20px; border-radius: 10px;">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_subject" value="New Assignment Request">
-      <input type="hidden" name="_template" value="box">
+ 
+<form id="assignment-form" style="max-width: 600px; margin: auto;" enctype="multipart/form-data">
+  <label>Type of Assignment:</label>
+  <input type="text" name="type_of_assignment" required style="width: 100%; padding: 10px;">
 
-      <label for="type" style="display:block; margin-top:15px; color:#fff;">Type of Assignment:</label>
-      <input type="text" name="Type of Assignment" id="type" required style="width:70%; padding:10px;">
+  <label>Word Count:</label>
+  <input type="number" name="word_count" required style="width: 100%; padding: 10px;">
 
-      <label for="words" style="display:block; margin-top:15px; color:#fff;">Word Count:</label>
-      <input type="number" name="Word Count" id="words" required style="width:70%; padding:10px;">
+  <label>Due Date:</label>
+  <input type="date" name="due_date" required style="width: 100%; padding: 10px;">
 
-      <label for="due" style="display:block; margin-top:15px; color:#fff;">Due Date:</label>
-      <input type="date" name="Due Date" id="due" required style="width:70%; padding:10px;">
+  <label>Upload File:</label>
+  <input type="file" id="assignment_file" required style="width: 100%; padding: 10px; background: #fff;">
 
-      <label for="file" style="display:block; margin-top:15px; color:#fff;">Upload Assignment File:</label>
-      <input type="file" name="attachment" id="file" required style="width:70%; padding:10px; background:#fff;">
+  <button type="submit" style="margin-top: 20px;">Submit Assignment</button>
+</form>
 
-      <button type="submit" style="margin-top: 20px; background-color:#00ffcc; color:#000; padding:10px; border:none; border-radius:5px; cursor:pointer;">Submit Assignment</button>
-    </form>
-  </section>
-</body>
-</html>
 
+<script>
+  document.getElementById("assignment-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const form = this;
+    const fileInput = document.getElementById("assignment_file");
+    const reader = new FileReader();
+
+    reader.onload = function () {
+      const base64File = reader.result.split(',')[1]; // Get base64 only
+      const templateParams = {
+        type_of_assignment: form.type_of_assignment.value,
+        word_count: form.word_count.value,
+        due_date: form.due_date.value,
+        file_data: base64File,
+        file_name: fileInput.files[0].name,
+      };
+
+      emailjs.send("service_y3ukzb9", "template_i0nzvaj", templateParams)
+        .then(function () {
+          alert("Assignment submitted successfully!");
+          form.reset();
+        }, function (error) {
+          alert("Failed to send. Error: " + error.text);
+        });
+    };
+
+    reader.readAsDataURL(fileInput.files[0]);
+  });
+</script>
 
 
 
