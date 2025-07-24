@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lunex.inc - Global IT Solutions</title>
+    <title>Lunex Consult - Global IT Solutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -83,8 +83,8 @@
         }
 
         .company-logo {
-            height: 100px; /* Adjust size as needed */
-            width: auto;
+            height: 120px; /* Adjust size as needed, e.g., 70px, 100px, 120px */
+            width: auto; /* Maintains aspect ratio */
             animation: fadeIn 1s ease-out 0.1s forwards; /* Logo fade in */
             opacity: 0; /* Start hidden */
         }
@@ -114,6 +114,16 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            max-width: 100%; /* Ensure it spans full width */
+            margin: 0 auto; /* Center the nav content if a max-width is applied to inner elements */
+        }
+        /* Optional: To align nav links with header content, wrap them in a container with max-width */
+        nav .nav-links {
+            max-width: 900px; /* Align with sections */
+            margin: 0 auto;
+            display: flex;
+            justify-content: center; /* Keep links centered within their container */
+            padding: 0 25px; /* Add padding consistent with sections */
         }
 
         nav a {
@@ -247,6 +257,20 @@
             background-color: #eef;
         }
 
+        /* Fix for disappearing text on hover within light sections */
+        /* This rule ensures text remains dark when hovered over in main content areas. */
+        section p:hover,
+        section span:hover,
+        section strong:hover,
+        section em:hover,
+        section a:hover:not(nav a):not(footer a), /* Target general links in sections */
+        section ul li span:hover, /* For text inside list items if it's wrapped */
+        section table td span:hover /* For text inside table cells if it's wrapped */
+        {
+            color: var(--dark-text) !important; /* Force text to dark color */
+        }
+
+
         /* Contact Form */
         form {
             background: white;
@@ -361,18 +385,19 @@
     <header>
         <div class="header-content">
             <div class="logo-container">
-                <img src="images/lunex-logo.png" alt="Lunex.inc Logo" class="company-logo">
-                <h1>Lunex.inc</h1>
+                <img src="images/lunex-logo.png" alt="Lunex Consult Logo" class="company-logo">
+                <h1>Lunex Consult</h1>
             </div>
             <p>Innovating Your Digital Future</p>
         </div>
     </header>
 
     <nav>
-        <a href="#services">Services</a>
-        <a href="#clients">Clients</a>
-        <a href="#academics">Academics</a>
-        <a href="#contact">Contact</a>
+        <div class="nav-links"> <a href="#services">Services</a>
+            <a href="#clients">Clients</a>
+            <a href="#academics">Academics</a>
+            <a href="#contact">Contact</a>
+        </div>
     </nav>
 
     <section id="services">
@@ -493,7 +518,7 @@
     </a>
 
     <footer>
-        © 2018 Lunex.inc — All rights reserved.<br />
+        © 2018 Lunex Inc — All rights reserved.<br />
         📞 +1 (227) 204-9578 | 📧 <a href="mailto:prashanth@lunexconsult.com" style="color: #aad4ff;">prashanth@lunexconsult.com</a>
     </footer>
 
