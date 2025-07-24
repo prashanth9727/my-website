@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Assignment Services - Lunex Consult</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0a0a23;
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #00ffcc;
+    }
+
+    form {
+      background: #1a1a2e;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+
+    input[type="file"] {
+      background-color: #ffffff;
+      color: #000;
+    }
+
+    button {
+      background-color: #00ffcc;
+      color: #000;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #00e6b8;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Assignment Services Inquiry</h2>
+
+  <form action="https://formsubmit.co/prash8687@gmail.com" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_subject" value="New Assignment Request">
+    <input type="hidden" name="_template" value="box">
+
+    <label for="type">Type of Assignment:</label>
+    <input type="text" name="Type of Assignment" id="type" required>
+
+    <label for="words">Word Count:</label>
+    <input type="number" name="Word Count" id="words" required>
+
+    <label for="due">Due Date:</label>
+    <input type="date" name="Due Date" id="due" required>
+
+    <label for="file">Upload Assignment File:</label>
+    <input type="file" name="attachment" id="file" required>
+
+    <button type="submit">Submit Assignment</button>
+  </form>
+
+</body>
+</html>
