@@ -21,9 +21,8 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            /* >>>>>> COMPLETE WEBSITE BACKGROUND COLOR MIXED HERE <<<<<< */
+            /* COMPLETE WEBSITE BACKGROUND COLOR MIXED HERE */
             background: linear-gradient(to bottom right, #e0f2f7, #e8f8e8); /* Soft blue to soft green gradient */
-            /* >>>>>> END BACKGROUND COLOR MIX <<<<<< */
             color: var(--dark-text);
             scroll-behavior: smooth;
             overflow-x: hidden; /* Prevent horizontal scroll from animations */
@@ -207,7 +206,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.08);
             font-size: 1.1em;
             border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Added background-color and color to transition */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
             animation: fadeIn 0.8s ease-out forwards; /* List item fade in */
             opacity: 0; /* Start hidden */
         }
@@ -216,15 +215,16 @@
             border-left-color: var(--secondary-color); /* Alternate border color */
         }
 
-        /* CRITICAL FIX FOR LIST ITEM HOVER */
+        /* ENHANCED FIX FOR LIST ITEM HOVER */
         ul li:hover {
             transform: translateY(-5px); /* Lift effect on hover */
             box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Stronger shadow on hover */
             animation: none; /* Stop pulse on hover if it was active */
-            background-color: #d8eaf0 !important; /* Force a distinct light blue background on hover */
-            color: var(--dark-text) !important; /* Force text to remain dark */
+            background-color: var(--accent-color) !important; /* Force a strong blue background on hover */
+            color: var(--light-text) !important; /* Force white text for strong contrast */
+            cursor: pointer; /* Indicate interactivity */
         }
-        /* END CRITICAL FIX */
+        /* END ENHANCED FIX */
 
         /* Animation delay for list items (staggered effect) */
         #services ul li:nth-child(1) { animation-delay: 0.1s; }
