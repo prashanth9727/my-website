@@ -478,8 +478,47 @@
     
 
   <!-- Your Assignment Section -->
- 
-<form id="assignment-form" style="max-width: 600px; margin: auto;" enctype="multipart/form-data">
+
+    <script type="module">
+  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+
+  emailjs.init('cmq8Rtphvl8EkYlrh'); // Replace with your actual public key
+
+  document.getElementById("assignment-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const form = this;
+    const fileInput = document.getElementById("assignment_file");
+
+    const reader = new FileReader();
+    reader.onload = async function () {
+      const base64File = reader.result.split(',')[1];
+
+      const templateParams = {
+        type_of_assignment: form.type_of_assignment.value,
+        word_count: form.word_count.value,
+        due_date: form.due_date.value,
+        file_data: base64File,
+        file_name: fileInput.files[0].name
+      };
+
+      try {
+        await emailjs.send('service_y3ukzb9', 'template_i0nzvaj', templateParams);
+        alert("Assignment submitted successfully!");
+        form.reset();
+      } catch (error) {
+        alert("Failed to send: " + error.text);
+      }
+    };
+
+    reader.readAsDataURL(fileInput.files[0]);
+  });
+</script>
+
+
+/* ASSIGNMENT FORM */
+    
+<form id="assignment-form" style="max-width: 600px; margin: auto;">
   <label>Type of Assignment:</label>
   <input type="text" name="type_of_assignment" required style="width: 100%; padding: 10px;">
 
@@ -495,37 +534,6 @@
   <button type="submit" style="margin-top: 20px;">Submit Assignment</button>
 </form>
 
-
-<script>
-  document.getElementById("assignment-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const form = this;
-    const fileInput = document.getElementById("assignment_file");
-    const reader = new FileReader();
-
-    reader.onload = function () {
-      const base64File = reader.result.split(',')[1]; // Get base64 only
-      const templateParams = {
-        type_of_assignment: form.type_of_assignment.value,
-        word_count: form.word_count.value,
-        due_date: form.due_date.value,
-        file_data: base64File,
-        file_name: fileInput.files[0].name,
-      };
-
-      emailjs.send("service_y3ukzb9", "template_i0nzvaj", templateParams)
-        .then(function () {
-          alert("Assignment submitted successfully!");
-          form.reset();
-        }, function (error) {
-          alert("Failed to send. Error: " + error.text);
-        });
-    };
-
-    reader.readAsDataURL(fileInput.files[0]);
-  });
-</script>
 
 
 
