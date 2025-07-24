@@ -59,6 +59,17 @@
             to { width: 100%; }
         }
 
+        /* 1. Universal Text Selection Highlight Fix */
+        /* This ensures that when you select text, it doesn't turn white on white */
+        ::selection {
+            background: var(--accent-color); /* Visible background when text is selected */
+            color: var(--light-text); /* Visible text color when text is selected */
+        }
+        ::-moz-selection { /* For Firefox */
+            background: var(--accent-color);
+            color: var(--light-text);
+        }
+
         header {
             background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: var(--light-text);
@@ -114,16 +125,6 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            max-width: 100%; /* Ensure it spans full width */
-            margin: 0 auto; /* Center the nav content if a max-width is applied to inner elements */
-        }
-        /* Optional: To align nav links with header content, wrap them in a container with max-width */
-        nav .nav-links {
-            max-width: 900px; /* Align with sections */
-            margin: 0 auto;
-            display: flex;
-            justify-content: center; /* Keep links centered within their container */
-            padding: 0 25px; /* Add padding consistent with sections */
         }
 
         nav a {
@@ -257,17 +258,28 @@
             background-color: #eef;
         }
 
-        /* Fix for disappearing text on hover within light sections */
-        /* This rule ensures text remains dark when hovered over in main content areas. */
+        /* 2. Defensive Rule for General Text Elements on Hover within Sections (light background) */
+        /* This forces common text elements to remain dark when hovered over, preventing white-on-white */
         section p:hover,
         section span:hover,
         section strong:hover,
         section em:hover,
-        section a:hover:not(nav a):not(footer a), /* Target general links in sections */
-        section ul li span:hover, /* For text inside list items if it's wrapped */
-        section table td span:hover /* For text inside table cells if it's wrapped */
-        {
-            color: var(--dark-text) !important; /* Force text to dark color */
+        section h1:hover, section h2:hover, section h3:hover,
+        section table td:hover { /* Added table cells here too */
+            color: var(--dark-text) !important; /* Forces text to remain dark */
+            /* If the background of these elements also becomes problematic on hover,
+               you might need to uncomment and adjust the line below. */
+            /* background-color: inherit !important; */
+        }
+
+        /* 3. Ensure links within sections have clear hover state (they are on white background) */
+        section a {
+            color: var(--accent-color); /* Default link color in sections */
+            text-decoration: underline; /* Makes them clearly links */
+        }
+        section a:hover {
+            color: var(--primary-color) !important; /* Change to a dark, distinct color on hover */
+            text-decoration: none; /* Remove underline on hover for a clean look */
         }
 
 
@@ -393,11 +405,10 @@
     </header>
 
     <nav>
-        <div class="nav-links"> <a href="#services">Services</a>
-            <a href="#clients">Clients</a>
-            <a href="#academics">Academics</a>
-            <a href="#contact">Contact</a>
-        </div>
+        <a href="#services">Services</a>
+        <a href="#clients">Clients</a>
+        <a href="#academics">Academics</a>
+        <a href="#contact">Contact</a>
     </nav>
 
     <section id="services">
