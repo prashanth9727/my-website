@@ -417,9 +417,9 @@
             transform: scale(1.1) rotate(5deg);
         }
 
-        /* Modal Styling (New) */
+        /* Modal Styling - IMPORTANT FIXES HERE */
         .modal {
-            display: none; /* IMPORTANT: Hidden by default initially */
+            display: none; /* THIS IS THE CRITICAL CHANGE: Hidden by default */
             position: fixed; /* Stay in place */
             z-index: 1001; /* Sit on top of everything */
             left: 0;
@@ -791,7 +791,8 @@
                         setTimeout(() => {
                             floatingLoader.style.display = 'none';
                             floatingContactForm.reset();
-                            contactModal.classList.remove('show'); // Close modal after successful submission
+                            // Close modal after successful submission
+                            contactModal.classList.remove('show');
                             setTimeout(() => {
                                 contactModal.style.display = 'none';
                             }, 300); // Match transition duration (0.3s)
