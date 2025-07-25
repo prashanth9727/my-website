@@ -419,7 +419,7 @@
 
         /* Modal Styling (New) */
         .modal {
-            display: none; /* Hidden by default */
+            display: none; /* IMPORTANT: Hidden by default initially */
             position: fixed; /* Stay in place */
             z-index: 1001; /* Sit on top of everything */
             left: 0;
@@ -428,7 +428,6 @@
             height: 100%; /* Full height */
             overflow: auto; /* Enable scroll if needed */
             background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
-            display: flex; /* Use flexbox for centering */
             justify-content: center; /* Center horizontally */
             align-items: center; /* Center vertically */
             opacity: 0; /* Start hidden for transition */
@@ -649,7 +648,7 @@
 
     <div id="contact-modal" class="modal">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
+            <span class="close-button">×</span>
             <h3>Quick Inquiry</h3>
             <form id="floating-contact-form">
                 <input type="text" name="user_name" placeholder="Your Name" required />
@@ -756,17 +755,28 @@
 
         if (fabButton && contactModal && closeModalButton && floatingContactForm && floatingLoader) { // Ensure all elements exist
             fabButton.addEventListener('click', () => {
-                contactModal.classList.add('show');
+                contactModal.style.display = 'flex'; // Make it visible (flex container)
+                // A small timeout to allow display change to register before opacity transition
+                setTimeout(() => {
+                    contactModal.classList.add('show'); // Then transition opacity
+                }, 10); // Small delay, e.g., 10ms
             });
 
             closeModalButton.addEventListener('click', () => {
-                contactModal.classList.remove('show');
+                contactModal.classList.remove('show'); // Start opacity transition
+                // After opacity transition, hide completely
+                setTimeout(() => {
+                    contactModal.style.display = 'none';
+                }, 300); // Match transition duration (0.3s)
             });
 
             // Close modal if user clicks outside of the modal content
             contactModal.addEventListener('click', (event) => {
                 if (event.target === contactModal) {
                     contactModal.classList.remove('show');
+                    setTimeout(() => {
+                        contactModal.style.display = 'none';
+                    }, 300); // Match transition duration (0.3s)
                 }
             });
 
@@ -782,6 +792,9 @@
                             floatingLoader.style.display = 'none';
                             floatingContactForm.reset();
                             contactModal.classList.remove('show'); // Close modal after successful submission
+                            setTimeout(() => {
+                                contactModal.style.display = 'none';
+                            }, 300); // Match transition duration (0.3s)
                         }, 3000);
                     }, (error) => {
                         floatingLoader.textContent = '❌ Failed to send. Please try again.';
