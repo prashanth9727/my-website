@@ -21,7 +21,6 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            /* COMPLETE WEBSITE BACKGROUND COLOR MIXED HERE */
             background: linear-gradient(to bottom right, #e0f2f7, #e8f8e8); /* Soft blue to soft green gradient */
             color: var(--dark-text);
             scroll-behavior: smooth;
@@ -115,7 +114,6 @@
             animation: slideInLeft 0.8s ease-out 0.4s forwards; /* Subtitle animation from left */
             opacity: 0; /* Start hidden */
         }
-
 
         nav {
             background-color: var(--primary-color);
@@ -283,20 +281,7 @@
             text-decoration: none; /* Remove underline on hover for a clean look */
         }
 
-/* Assignment contact form EmailJS */
-<script type="text/javascript"
-  src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script type="text/javascript">
-  (function() {
-    emailjs.init("cmq8Rtphvl8EkYlrh"); // Replace with your EmailJS public key
-  })();
-</script>
-
-
-
-
-        
-        /* Contact Form */
+        /* Contact Form (General Styling, re-used by assignment and floating form) */
         form {
             background: white;
             padding: 30px;
@@ -340,7 +325,7 @@
             animation: none; /* Stop pulse on hover */
         }
 
-        #loader {
+        #loader, .loader-message { /* Combined loader styles */
             display: none;
             text-align: center;
             margin-top: 15px;
@@ -380,6 +365,7 @@
             animation: fadeIn 1s ease-out; /* Map fade in */
         }
 
+        /* WhatsApp Floating Button */
         .whatsapp-float {
             position: fixed;
             bottom: 25px;
@@ -403,6 +389,108 @@
             transform: scale(1.1) rotate(5deg);
             animation: none; /* Stop pulse on hover */
         }
+
+        /* Floating Action Button (New) */
+        .floating-action-button {
+            position: fixed;
+            bottom: 90px; /* Positioned above WhatsApp button */
+            right: 25px;
+            z-index: 999; /* Below WhatsApp, above content */
+            background-color: var(--secondary-color); /* Pink color */
+            color: var(--light-text);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.8em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            outline: none; /* Remove focus outline */
+        }
+
+        .floating-action-button:hover {
+            background-color: #c03a9d; /* Slightly darker pink */
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Modal Styling (New) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1001; /* Sit on top of everything */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            opacity: 0; /* Start hidden for transition */
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            max-width: 500px; /* Max width for modal form */
+            width: 90%; /* Responsive width */
+            transform: translateY(-50px); /* Start slightly above for transition */
+            opacity: 0; /* Start hidden for transition */
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0); /* Slide down into place */
+            opacity: 1;
+        }
+
+        .modal-content h3 {
+            text-align: center;
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Disable pulse animation on modal button as it's repetitive */
+        .modal-content form button {
+            animation: none;
+        }
+        .modal-content form button:hover {
+            animation: none;
+        }
+
     </style>
 </head>
 <body>
@@ -473,73 +561,24 @@
         </ul>
     </section>
 
+    <section id="assignment-section" style="max-width: 600px; margin: 50px auto; padding: 40px; background: white; border-radius: 10px; box-shadow: var(--shadow-light);">
+        <h2>📝 Submit Your Assignment</h2>
+        <form id="assignment-form">
+            <label for="assignment_type">Type of Assignment:</label>
+            <input type="text" id="assignment_type" name="type_of_assignment" required />
 
+            <label for="word_count">Word Count:</label>
+            <input type="number" id="word_count" name="word_count" required />
 
-    
+            <label for="due_date">Due Date:</label>
+            <input type="date" id="due_date" name="due_date" required />
 
-  <!-- Your Assignment Section -->
+            <label for="assignment_file">Upload File:</label>
+            <input type="file" id="assignment_file" required />
 
-    <script type="module">
-  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-
-  emailjs.init('cmq8Rtphvl8EkYlrh'); // Replace with your actual public key
-
-  document.getElementById("assignment-form").addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const form = this;
-    const fileInput = document.getElementById("assignment_file");
-
-    const reader = new FileReader();
-    reader.onload = async function () {
-      const base64File = reader.result.split(',')[1];
-
-      const templateParams = {
-        type_of_assignment: form.type_of_assignment.value,
-        word_count: form.word_count.value,
-        due_date: form.due_date.value,
-        file_data: base64File,
-        file_name: fileInput.files[0].name
-      };
-
-      try {
-        await emailjs.send('service_y3ukzb9', 'template_i0nzvaj', templateParams);
-        alert("Assignment submitted successfully!");
-        form.reset();
-      } catch (error) {
-        alert("Failed to send: " + error.text);
-      }
-    };
-
-    reader.readAsDataURL(fileInput.files[0]);
-  });
-</script>
-
-
-/* ASSIGNMENT FORM */
-    
-<form id="assignment-form" style="max-width: 600px; margin: auto;">
-  <label>Type of Assignment:</label>
-  <input type="text" name="type_of_assignment" required style="width: 100%; padding: 10px;">
-
-  <label>Word Count:</label>
-  <input type="number" name="word_count" required style="width: 100%; padding: 10px;">
-
-  <label>Due Date:</label>
-  <input type="date" name="due_date" required style="width: 100%; padding: 10px;">
-
-  <label>Upload File:</label>
-  <input type="file" id="assignment_file" required style="width: 100%; padding: 10px; background: #fff;">
-
-  <button type="submit" style="margin-top: 20px;">Submit Assignment</button>
-</form>
-
-
-
-
-
-
-    
+            <button type="submit">Submit Assignment</button>
+        </form>
+    </section>
     <section id="clients">
         <h2>Client Success Stories</h2>
         <ul>
@@ -604,6 +643,25 @@
         </div>
     </section>
 
+    <button id="fab-contact" class="floating-action-button" title="Quick Contact">
+        💬
+    </button>
+
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Quick Inquiry</h3>
+            <form id="floating-contact-form">
+                <input type="text" name="user_name" placeholder="Your Name" required />
+                <input type="email" name="user_email" placeholder="Your Email" required />
+                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Inquiry</button>
+            </form>
+            <div id="floating-loader" class="loader-message">⏳ Sending message...</div>
+        </div>
+    </div>
+
+
     <a class="whatsapp-float" href="https://wa.me/12272049578" target="_blank" title="Chat with us on WhatsApp">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
     </a>
@@ -613,33 +671,127 @@
         📞 +1 (227) 204-9578 | 📧 <a href="mailto:prashanth@lunexconsult.com" style="color: #aad4ff;">prashanth@lunexconsult.com</a>
     </footer>
 
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        emailjs.init("cmq8Rtphvl8EkYlrh"); // Replace with your actual EmailJS User ID
+    <script type="module">
+        // Import EmailJS as a module
+        import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
 
-        const form = document.getElementById('contact-form');
-        const loader = document.getElementById('loader');
+        // Initialize EmailJS once globally with your Public Key
+        emailjs.init("cmq8Rtphvl8EkYlrh"); // Replace with your actual EmailJS Public Key
 
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            loader.style.display = 'block';
-            loader.textContent = '⏳ Sending message...'; // Reset loader text
+        // --- Contact Us Form (Existing) ---
+        const contactForm = document.getElementById('contact-form');
+        const contactLoader = document.getElementById('loader');
 
-            emailjs.sendForm('service_y3ukzb9', 'template_i0nzvaj', this) // Replace with your EmailJS Service ID and Template ID
-                .then(() => {
-                    loader.textContent = '✅ Sent! Thank you.';
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                        form.reset();
-                    }, 3000);
-                }, (error) => {
-                    loader.textContent = '❌ Failed to send. Please try again.';
-                    console.error('EmailJS error:', error);
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                    }, 3000);
-                });
-        });
+        if (contactForm) { // Ensure the form exists before adding listener
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                contactLoader.style.display = 'block';
+                contactLoader.textContent = '⏳ Sending message...';
+
+                emailjs.sendForm('service_y3ukzb9', 'template_i0nzvaj', this) // Use sendForm for standard forms
+                    .then(() => {
+                        contactLoader.textContent = '✅ Sent! Thank you.';
+                        setTimeout(() => {
+                            contactLoader.style.display = 'none';
+                            contactForm.reset();
+                        }, 3000);
+                    }, (error) => {
+                        contactLoader.textContent = '❌ Failed to send. Please try again.';
+                        console.error('EmailJS error (Contact Form):', error);
+                        setTimeout(() => {
+                            contactLoader.style.display = 'none';
+                        }, 3000);
+                    });
+            });
+        }
+
+        // --- Assignment Form (Existing, with File Upload) ---
+        const assignmentForm = document.getElementById("assignment-form");
+
+        if (assignmentForm) { // Ensure the form exists before adding listener
+            assignmentForm.addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const fileInput = document.getElementById("assignment_file");
+                if (!fileInput.files.length) {
+                    alert("Please select a file to upload.");
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = async function () {
+                    const base64File = reader.result.split(',')[1]; // Get base64 data
+                    const fileName = fileInput.files[0].name;
+
+                    const templateParams = {
+                        type_of_assignment: assignmentForm.type_of_assignment.value,
+                        word_count: assignmentForm.word_count.value,
+                        due_date: assignmentForm.due_date.value,
+                        file_data: base64File, // This variable holds the base64 content
+                        file_name: fileName    // This variable holds the original file name
+                    };
+
+                    try {
+                        // For file attachments, use emailjs.send() with templateParams
+                        await emailjs.send('service_y3ukzb9', 'template_i0nzvaj', templateParams); // IMPORTANT: Ensure this template is set up for attachments in EmailJS dashboard
+                        alert("Assignment submitted successfully!");
+                        assignmentForm.reset();
+                    } catch (error) {
+                        alert("Failed to send assignment: " + error.text);
+                        console.error("EmailJS error (Assignment Form):", error);
+                    }
+                };
+
+                reader.readAsDataURL(fileInput.files[0]); // Read file as Base64
+            });
+        }
+
+
+        // --- Floating Contact Form (New) ---
+        const fabButton = document.getElementById('fab-contact');
+        const contactModal = document.getElementById('contact-modal');
+        const closeModalButton = contactModal.querySelector('.close-button');
+        const floatingContactForm = document.getElementById('floating-contact-form');
+        const floatingLoader = document.getElementById('floating-loader');
+
+        if (fabButton && contactModal && closeModalButton && floatingContactForm && floatingLoader) { // Ensure all elements exist
+            fabButton.addEventListener('click', () => {
+                contactModal.classList.add('show');
+            });
+
+            closeModalButton.addEventListener('click', () => {
+                contactModal.classList.remove('show');
+            });
+
+            // Close modal if user clicks outside of the modal content
+            contactModal.addEventListener('click', (event) => {
+                if (event.target === contactModal) {
+                    contactModal.classList.remove('show');
+                }
+            });
+
+            floatingContactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                floatingLoader.style.display = 'block';
+                floatingLoader.textContent = '⏳ Sending message...';
+
+                emailjs.sendForm('service_y3ukzb9', 'template_i0nzvaj', this) // Use sendForm for standard forms
+                    .then(() => {
+                        floatingLoader.textContent = '✅ Sent! Thank you.';
+                        setTimeout(() => {
+                            floatingLoader.style.display = 'none';
+                            floatingContactForm.reset();
+                            contactModal.classList.remove('show'); // Close modal after successful submission
+                        }, 3000);
+                    }, (error) => {
+                        floatingLoader.textContent = '❌ Failed to send. Please try again.';
+                        console.error('EmailJS error (Floating Form):', error);
+                        setTimeout(() => {
+                            floatingLoader.style.display = 'none';
+                        }, 3000);
+                    });
+            });
+        }
     </script>
 
     <script>
