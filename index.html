@@ -3,6 +3,360 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lunex Consult – Academic & Global Visa Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #0b1a2b;
+      --secondary-color: #d94bb5;
+      --accent-color: #007bff;
+      --light-bg: #f5fafd;
+      --dark-text: #222c38;
+      --border-color: #e0e6ef;
+      --shadow-light: 0 2px 7px rgba(0,0,0,0.06);
+    }
+    html, body {margin:0; padding:0;}
+    body {
+      font-family: 'Roboto', 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(130deg, #e0f2f7 0%, #f5fafd 100%);
+      color: var(--dark-text);
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(100deg, var(--primary-color), var(--secondary-color) 90%);
+      color: #fff;
+      padding: 36px 0 25px 0;
+      box-shadow: 0 2px 8px rgba(10,30,60,0.08);
+      text-align: left;
+    }
+    .header-content {max-width:1024px;margin:0 auto;padding:0 18px;display:flex;flex-direction:column;align-items:flex-start;}
+    .logo-container {display:flex;align-items:center;gap:17px;}
+    .company-logo {
+      height:54px; min-width:54px; width:auto; border-radius:8px; background:#fff;
+      box-shadow:0 1.5px 8px rgba(44,44,77,0.13);
+    }
+    header h1 {font-family:'Montserrat',serif;font-weight:700;font-size:2.1em;margin:0 0 3px 0;}
+    .slogan {font-size:1.02em;font-weight:400;color:#f6d6ee;opacity:.83;}
+    nav {
+      display: flex; justify-content: center; align-items: center; gap: 7px;
+      background: var(--primary-color);
+      position: sticky;top:0;z-index:30;box-shadow: 0 1.5px 10px rgba(20,35,48,0.10);
+    }
+    .nav-toggle {display:none;}
+    .nav-menu {display:flex;gap:5px;}
+    nav a, .nav-menu a {
+      color: #fff;font-weight:500;padding: 11px 20px; text-decoration:none;
+      display:inline-block; font-size:1.08em;border-bottom:2px solid transparent;transition:color .3s,border-color .3s;letter-spacing:.1px;
+    }
+    nav a:hover, .nav-menu a:hover {color:var(--secondary-color);border-bottom:2px solid var(--secondary-color);}
+    .cta-nav {
+      background: var(--secondary-color); color: #fff !important; border-radius:6px;margin-left:11px;
+      transition:background .23s,color .13s;font-weight:600;box-shadow:0 3px 10px rgba(217,75,181,0.06);
+      border: none;
+    }
+    .cta-nav:hover { background: var(--accent-color); color: #fff;}
+
+    /* Mobile nav hamburger */
+    @media (max-width:750px) {
+      .nav-menu {display: none;position:absolute;top:56px;left:0;width:100vw;flex-direction:column;background:var(--primary-color);}
+      .nav-menu.open {display:flex;}
+      .nav-toggle {display:block; cursor:pointer;color:#fff;font-size:2em;position:absolute;right:18px;top:10px;}
+      nav {position:relative;}
+    }
+
+    main {max-width:1100px;margin:0 auto;padding:0 12px;}
+    section {background:#fff;margin:44px 0;padding:40px 18px 32px 18px;border-radius:12px;box-shadow:var(--shadow-light);}
+    section h2 {color:var(--primary-color);font-weight:700;font-size:1.6em;letter-spacing:.2px;border-bottom:2.5px solid #e4e7ef; padding-bottom:10px;text-align:left;}
+    /* Services and Visa sections as card grids */
+    .cards {display: grid;grid-template-columns: repeat(auto-fit,minmax(258px,1fr));gap:30px;}
+    .card {
+      background: var(--light-bg);border: 1.5px solid var(--border-color);border-radius:11px;
+      padding: 29px 15px 17px 15px;box-shadow:0 2px 14px rgba(55,70,100,0.03);
+      text-align:left;transition: box-shadow .21s,transform .19s;
+    }
+    .card-title {color: var(--primary-color); font-size:1.12em; font-weight:600; margin-bottom:10px;}
+    .card ul {list-style:none;padding-left:0;margin:0;}
+    .card ul li {margin:8px 0; font-size:1em;}
+    .card .region-flags {font-size:.98em; opacity:.77;}
+    .card-icon {
+      font-size:2em;display:inline-block;margin-bottom:6px;
+      background:linear-gradient(90deg,#c2dcfa 0,#fae8f9 100%);
+      border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+      margin-right:9px;
+    }
+    .card:hover {box-shadow:0 7px 17px rgba(44,62,80,.13);transform:translateY(-4px) scale(1.012);}
+    /* Visa grid callouts */
+    .visa-grid {display:grid;grid-template-columns: repeat(auto-fit,minmax(205px,1fr));gap:19px;}
+    .visa-card {background:#f5f8ff;border-radius:9px;padding:18px 10px 8px 18px;border:1px solid #e9eaf3;font-size:1em;}
+    .visa-card .visa-country {font-weight:bold;color:var(--primary-color);font-size:1.06em;}
+    .visa-card .visa-flags {font-size:1.5em;margin-right:7px;}
+    .visa-card ul {margin:0 0 6px 0;padding-left:21px;}
+    /* Testimonials */
+    .testimonials {display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:20px;}
+    .testimonial {background:#fafaff;border-radius:9px;padding:20px 14px;margin-bottom:5px;border:1.5px solid var(--border-color);}
+    .testimonial-text {font-size:1em;color:#40405a;margin-bottom:5px;}
+    .testimonial-by {color:#8e90ab;font-size:.96em;}
+    /* Forms & Contact */
+    form {max-width:440px;margin:0 auto;background: #fcfcfd;padding:26px 20px 20px 20px;border-radius:10px;box-shadow:0 1.7px 12px rgba(0,34,50,0.02);display:flex;flex-direction:column;gap:13px;border:1px solid #eef1f8;}
+    form input,form textarea {border:1.5px solid #d8dbe5;border-radius:6px;padding:10px;font-size:1em;}
+    form input:focus,form textarea:focus {border-color: var(--secondary-color);outline:none;box-shadow:0 0 0 2px rgba(217,75,181,0.09);}
+    form button {background:var(--primary-color);color:#fff;font-weight:600;border:none;border-radius:6px;padding:13px 0;font-size:1.1em;cursor:pointer;}
+    form button:hover{background:var(--accent-color);}
+    #loader,.loader-message{display:none;text-align:center;color:var(--primary-color);font-size:1.04em;margin-top:10px;}
+    /* Mobile Styles */
+    @media (max-width:750px){
+      header {padding:23px 0 15px 0;}
+      main {padding:0 1vw;}
+      section {padding:21px 2vw;}
+      .header-content{padding:0 9px;}
+      .cards, .visa-grid, .testimonials{grid-template-columns:1fr;}
+    }
+    @media (max-width:440px){
+      .company-logo {height:34px;}
+      header h1 {font-size:1.13em;}
+    }
+    /* Footer */
+    footer{padding:30px 0 18px 0;background:#081423;color:#e3e7ef;text-align:center;font-size:1.01em;margin-top:50px;}
+    .footer-row{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:8px;}
+    .footer-social a {display:inline-block;margin:0 7px;transition:transform .17s;font-size:1.27em;color:#aad4ff;text-decoration:none;}
+    .footer-social a:hover{transform:scale(1.16);color:var(--secondary-color);}
+    footer a {color:#aad4ff;text-decoration:none;}footer a:hover{color:var(--secondary-color);}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo-container">
+        <img src="images/lunex-logo.png" alt="Lunex Consult Logo" class="company-logo" />
+        <h1>Lunex Consult</h1>
+      </div>
+      <div class="slogan">Empowering Academic Growth & Global Mobility</div>
+    </div>
+  </header>
+  <nav>
+    <span class="nav-toggle" id="navToggle" aria-label="Toggle navigation">&#9776;</span>
+    <div class="nav-menu" id="navMenu">
+      <a href="#services">Academic Services</a>
+      <a href="#visa">Visa Support</a>
+      <a href="#clients">Success</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="cta-nav">Book a Consult</a>
+    </div>
+  </nav>
+  <main>
+    <!-- Focused Academic Services -->
+    <section id="services">
+      <h2>Academic Services: Achieve Excellence Worldwide</h2>
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon" aria-label="Personal Tutoring">🎓</span>
+          <div class="card-title">Expert Tutoring & Coursework</div>
+          <ul>
+            <li>Personalized support in STEM, Business, Health, Social Sciences</li>
+            <li>Assignments, capstones, plagiarism-free, citation-ready docs</li>
+            <li>Online & in-person sessions, flexible to your time zone</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="card-icon" aria-label="Exam Prep">📝</span>
+          <div class="card-title">Exam Preparation</div>
+          <ul>
+            <li>Mock exams, quiz sets, live reviews</li>
+            <li>Concept deep-dives for top retention</li>
+            <li>Special coaching for international boards & universities</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="card-icon" aria-label="Research & Publication">📑</span>
+          <div class="card-title">Research & Publication</div>
+          <ul>
+            <li>Journal submission, formatting (APA, MLA, IEEE, more)</li>
+            <li>Editing, peer review help, thesis guidance</li>
+            <li>Scopus/SCI-indexed journals, global publishing advice</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin:22px 0 0 0;">
+        <strong>Fields supported:</strong> Computer Science, AI/ML, Engineering, Business Analytics, Medicine, Law, Social Policy, Psychology, and more.<br>
+        <strong>Academic Tools:</strong> SPSS, R, Python, NVivo, Grammarly, LaTeX.
+      </div>
+    </section>
+    <!-- Visa & Global Support -->
+    <section id="visa">
+      <h2>Visa Support: Study & Work Anywhere</h2>
+      <p>
+        Our world-class visa consultancy helps students and professionals secure admissions and work permits to top countries around the globe. We provide <strong>step-by-step guidance</strong> to ensure your success.
+      </p>
+      <div class="visa-grid">
+        <div class="visa-card">
+          <div class="visa-country"><span class="visa-flags">🇺🇸</span>USA</div>
+          <ul>
+            <li>F-1, OPT, J-1, H-1B, B1/B2 support</li>
+            <li>University selection, visa coaching, interviews</li>
+          </ul>
+        </div>
+        <div class="visa-card">
+          <div class="visa-country"><span class="visa-flags">🇨🇦</span>Canada</div>
+          <ul>
+            <li>Study permits, PGWP, Express Entry</li>
+            <li>SOP/LOR, admissions guidance, visa checklists</li>
+          </ul>
+        </div>
+        <div class="visa-card">
+          <div class="visa-country"><span class="visa-flags">🇬🇧</span>UK</div>
+          <ul>
+            <li>Tier 4 Student, Graduate, Skilled Worker, NHS visas</li>
+            <li>UCAS, personal statement, GTE, CAS</li>
+          </ul>
+        </div>
+        <div class="visa-card">
+          <div class="visa-country"><span class="visa-flags">🇦🇺</span>Australia</div>
+          <ul>
+            <li>Subclass 500 student visas, skilled migration</li>
+            <li>Statement of Purpose, GTE, PR counseling</li>
+          </ul>
+        </div>
+        <div class="visa-card">
+          <div class="visa-country"><span class="visa-flags">🇩🇪</span>Germany</div>
+          <ul>
+            <li>TU9, student visas, blocked account help, APS</li>
+            <li>Visa document review, interview training</li>
+          </ul>
+        </div>
+        <div class="visa-card">
+          <div class="visa-country"><span class="visa-flags">🇳🇿</span>New Zealand</div>
+          <ul>
+            <li>Student and work visa counseling</li>
+            <li>Course and financial docs, PR advice</li>
+          </ul>
+        </div>
+        <div class="visa-card">
+          <div class="visa-country"><span class="visa-flags">🌏</span>Worldwide</div>
+          <ul>
+            <li>Singapore, Ireland, Netherlands, UAE, Asia & Europe</li>
+            <li>Business, research, spouse & specialized visas</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:17px;">
+        <b>What makes us different?</b>
+        <ul>
+          <li>Multi-country admissions/visa success</li>
+          <li>Up-to-date on all policy shifts</li>
+          <li>Clear document checklists & FAQ guidance</li>
+          <li>Full transparency & ethical, client-centered approach</li>
+        </ul>
+      </div>
+    </section>
+    <!-- Success/Testimonials -->
+    <section id="clients">
+      <h2>Real Success Across Continents</h2>
+      <div class="testimonials">
+        <div class="testimonial">
+          <div class="testimonial-text">
+            “With Lunex, my F-1 visa interview and application process to the U.S. was stress-free. I was guided at every step. Thank you for the personal touch!”
+          </div>
+          <div class="testimonial-by">– Priya, Masters in Finance, New York</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-text">
+            “My son’s engineering admission in Germany with full visa assistance was only possible because of your detailed checklists and authentic support.”
+          </div>
+          <div class="testimonial-by">– Mr. Lee, Singapore</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-text">
+            “I was struggling with my MBA thesis publication—Lunex editing made my research journal-ready. The peer review flew through!”
+          </div>
+          <div class="testimonial-by">– Oksana, Moscow</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-text">
+            “All our startup’s interns received Canada student visas in one go. Brilliant support, always available, and so transparent.”
+          </div>
+          <div class="testimonial-by">– S. Sharma, India</div>
+        </div>
+      </div>
+      <div style="margin-top:18px;text-align:center;">
+        <a href="#contact" class="cta-nav">Book Your Free Academic / Visa Consultation</a>
+      </div>
+    </section>
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <form id="contact-form">
+        <input type="text" name="user_name" placeholder="Your Name" required />
+        <input type="email" name="user_email" placeholder="Your Email" required />
+        <textarea name="message" rows="5" placeholder="How can we help you?" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <div id="loader">⏳ Sending message...</div>
+      <div style="margin-top:22px;" id="map">
+        <h2 style="font-size:1.1em;color:#333;font-weight:600;background:none;border:none;margin-bottom:13px;margin-top:0;">📍 Our Location</h2>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3106.840244799793!2d-77.5615809236173!3d38.90372134547285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b6389762692095%3A0xc3f7a1f237ef39ce!2sBannockburn%20Ter%2C%20South%20Riding%2C%20VA%2020152!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+          style="width:100%;height:220px;border:0; border-radius:7px; box-shadow:0 2px 8px rgba(0,0,0,0.04);"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
+  </main>
+  <!-- WhatsApp Chat Floating (optional: remove if not needed) -->
+  <a class="whatsapp-float" href="https://wa.me/12272049578" target="_blank" title="Chat with us on WhatsApp" style="position:fixed;bottom:22px;right:22px;z-index:1000;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:52px;height:52px;background:#25D366;border-radius:50%;padding:9px;box-shadow:0 3px 12px rgba(0,0,0,0.14);"/>
+  </a>
+  <footer>
+    <div>© 2018–2025 Lunex Inc — All rights reserved.</div>
+    <div class="footer-row">
+      <div>📞 +1 (227) 204-9578</div>
+      <div>📧 <a href="mailto:prashanth@lunexconsult.com">prashanth@lunexconsult.com</a></div>
+      <div class="footer-social">
+        <a href="https://linkedin.com/company/lunexconsult" target="_blank" title="LinkedIn" aria-label="LinkedIn"><span aria-hidden="true">💼</span></a>
+        <a href="https://twitter.com/lunexconsult" target="_blank" title="Twitter/X" aria-label="X/Twitter"><span aria-hidden="true">🐦</span></a>
+      </div>
+    </div>
+    <div style="font-size:.93em;opacity:.74;margin-top:7px;">Academic success & global mobility – made simple.</div>
+  </footer>
+  <!-- Mobile hamburger menu JS -->
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+    navToggle?.addEventListener('click', () => navMenu.classList.toggle('open'));
+    // Collapse nav on item click (mobile)
+    document.querySelectorAll('#navMenu a').forEach(link =>
+      link.addEventListener('click', () => navMenu.classList.remove('open'))
+    );
+  </script>
+  <!-- EmailJS (contact form) -->
+  <script type="module">
+    import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+    emailjs.init("cmq8Rtphvl8EkYlrh");
+    const contactForm = document.getElementById('contact-form');
+    const contactLoader = document.getElementById('loader');
+    if(contactForm) {
+      contactForm.addEventListener('submit', function(event){
+        event.preventDefault();
+        contactLoader.style.display='block';
+        contactLoader.textContent='⏳ Sending message...';
+        emailjs.sendForm('service_y3ukzb9', 'template_i0nzvaj', this)
+          .then(()=>{
+            contactLoader.textContent='✅ Sent! Thank you.';
+            setTimeout(()=>{contactLoader.style.display='none';contactForm.reset();},2600);
+          },()=>{
+            contactLoader.textContent='❌ Failed. Please try again.';
+            setTimeout(()=>{contactLoader.style.display='none';},2500);
+          });
+      });
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lunex Consult – Global IT & Academic Solutions</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
@@ -622,3 +976,4 @@
   </script>
 </body>
 </html>
+
