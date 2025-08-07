@@ -1,829 +1,624 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lunex Consult - Global IT Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #0b1a2b;
-            --secondary-color: #d94bb5;
-            --accent-color: #007bff;
-            --light-bg: #f4f8f8; /* This light background will now mostly apply to sections */
-            --dark-text: #333;
-            --light-text: white;
-            --border-color: #ccc;
-            --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lunex Consult – Global IT & Academic Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #0b1a2b;
+      --secondary-color: #d94bb5;
+      --accent-color: #007bff;
+      --light-bg: #f5fafd;
+      --dark-text: #262c38;
+      --light-text: #fff;
+      --border-color: #e0e6ef;
+      --shadow-light: 0 2px 7px rgba(0,0,0,0.06);
+    }
+    html, body {margin:0; padding:0;}
+    body {
+      font-family: 'Roboto', 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(130deg, #e0f2f7 0%, #f5fafd 100%);
+      color: var(--dark-text);
+      min-height: 100vh;
+    }
+    /* Header & Branding */
+    header {
+      background: linear-gradient(98deg, var(--primary-color), var(--secondary-color) 90%);
+      color: var(--light-text);
+      padding: 40px 0 30px 0;
+      box-shadow: 0 2px 8px rgba(10,30,60,0.08);
+      text-align: left;
+    }
+    .header-content {
+      max-width: 1040px; margin:0 auto; padding:0 22px;
+      display:flex; flex-direction:column; align-items: flex-start;
+      gap: 8px;
+    }
+    .logo-container {
+      display: flex; align-items:center; gap: 18px;
+    }
+    .company-logo {
+      height: 60px;
+      width: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(44,44,77,.10);
+      background: #fff;
+    }
+    header h1 {
+      font-family: 'Montserrat', serif;
+      font-weight: 700;
+      font-size: 2.4em;
+      margin: 0;
+      letter-spacing:0.2px;
+    }
+    header .slogan {
+      font-size: 1em;
+      font-weight: 400;
+      color: #f6d6ee;
+      margin-left: 2px;
+      opacity: .8;
+    }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom right, #e0f2f7, #e8f8e8); /* Soft blue to soft green gradient */
-            color: var(--dark-text);
-            scroll-behavior: smooth;
-            overflow-x: hidden; /* Prevent horizontal scroll from animations */
-        }
+    /* Navigation Bar */
+    nav {
+      position: sticky; top:0; z-index:30;
+      background: var(--primary-color);
+      display: flex; justify-content:center; align-items:center;
+      gap: 8px;
+      box-shadow: 0 1.5px 10px rgba(20,35,48,0.12);
+    }
+    nav a {
+      color: var(--light-text); font-weight: 500;
+      padding: 11px 20px; text-decoration:none;
+      display:inline-block; font-size:1.08em;
+      border-bottom:2.5px solid transparent;
+      transition: color .3s, border-color .3s;
+      letter-spacing:.2px;
+    }
+    nav a:hover {
+      color: var(--secondary-color);
+      border-bottom:2.5px solid var(--secondary-color);
+    }
+    .cta-nav {
+      background: var(--secondary-color);
+      color: #fff !important;
+      border-radius: 6px;
+      margin-left:20px;
+      transition: background .3s, color .15s;
+      font-weight:600;
+      border: none;
+      box-shadow: 0 3px 10px rgba(217,75,181,0.06);
+    }
+    .cta-nav:hover { background: var(--accent-color); color: #fff;}
 
-        /* Keyframes for animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    /* Main Section Styles */
+    main {max-width: 1100px; margin:0 auto; padding:0 18px;}
+    section {
+      background: #fff;
+      margin: 45px 0;
+      padding: 40px 38px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-light);
+      transition: box-shadow .28s;
+    }
+    section h2 {
+      color: var(--primary-color);
+      font-weight: 700; font-size:2em;
+      margin-top:0; margin-bottom:30px;
+      border-bottom:3px solid #e1e8f0;
+      padding-bottom:12px; text-align: center;
+      letter-spacing:.4px;
+    }
+    /* CARDS LAYOUT FOR SERVICES */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(256px,1fr));
+      gap: 30px;
+      margin-bottom:30px;
+    }
+    .card {
+      background: var(--light-bg);
+      border: 1.5px solid var(--border-color);
+      border-radius: 11px;
+      padding: 32px 20px 22px 20px;
+      box-shadow: 0 2px 14px rgba(55,70,100,0.04);
+      text-align: center;
+      transition: transform .22s, box-shadow .2s;
+    }
+    .card-icon {
+      font-size: 2.1em;
+      display:block; margin-bottom: 8px;
+      background: linear-gradient(90deg,#c2dcfa 0,#fae8f9 100%);
+      border-radius:50%;
+      width: 56px; height: 56px;
+      display: flex; align-items:center; justify-content:center;
+      margin: 0 auto 15px auto;
+    }
+    .card-title {
+      color: var(--primary-color);
+      font-size:1.21em; font-weight:600;
+      margin-bottom:10px;
+    }
+    .card ul {
+      list-style:none; padding-left:0; margin:0; text-align:left;
+    }
+    .card ul li {margin: 7px 0; font-size:.99em;}
+    .card .region-flags {font-size:.97em; opacity:.8;}
+    .card:hover {
+      box-shadow: 0 7px 34px rgba(44,62,80,.15);
+      transform: translateY(-4px) scale(1.022);
+      background: #fff;
+      border-color: var(--accent-color);
+    }
 
-        @keyframes slideInUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+    /* SPECIALIZED TESTIMONIALS BLOCK */
+    .testimonials {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+      gap: 25px;
+    }
+    .testimonial {
+      background: #fafaff;
+      border-radius:9px; padding:22px 20px 16px 20px;
+      border: 1.5px solid var(--border-color);
+      box-shadow: 0 1px 10px rgba(44,44,77,.05);
+      display: flex; flex-direction:column; align-items:start;
+    }
+    .testimonial .client-logo {
+      height:35px;
+      width:auto;
+      margin-bottom:12px;
+      border-radius:5px;
+      background: #fff; object-fit:contain;
+    }
+    .testimonial-text {
+      font-size:1.08em; color:#43445a; margin-bottom: 7px;
+      line-height:1.45;
+    }
+    .testimonial-by {color:#888abd; font-size:0.97em;}
+    /* CLIENT LIST FALLBACK FOR MOBILE */
+    .clients-list { list-style: none; padding:0; margin-top: 18px;}
+    .clients-list li { margin: 8px 0; font-size:1.01em; }
 
-        @keyframes slideInLeft {
-            from { transform: translateX(-50px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
+    /* Academic & Global Support Section */
+    .fields-supported {font-size:1.07em; margin:20px 0 7px 0;}
+    .table-visa {width: 100%; border-collapse:collapse; margin-top:20px;}
+    .table-visa th, .table-visa td {padding:13px; border:1px solid #d9dddd;}
+    .table-visa th {background: var(--primary-color); color:#fff;}
+    .table-visa tr:nth-child(even) {background:#f6fafe;}
+    .table-visa tr:hover {background: #e8efff;}
 
-        @keyframes slideInRight {
-            from { transform: translateX(50px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
+    /* Forms */
+    form {
+      max-width:440px;
+      margin:0 auto; background: #fafdff;
+      padding:30px;
+      border-radius:9px;
+      box-shadow:0 1.7px 15px rgba(0,34,50,0.03);
+      display:flex;flex-direction:column;gap:13px;
+      border:1px solid #eef1f8;
+    }
+    form input,form textarea {
+      border:1.5px solid #d8dbe5;
+      border-radius:6px;
+      padding:10px;
+      font-size:1em;
+      resize:vertical;
+    }
+    form input:focus,form textarea:focus {
+      border-color: var(--secondary-color);
+      outline:none;
+      box-shadow:0 0 0 2px rgba(217,75,181,0.09);
+    }
+    form button {
+      background:var(--primary-color);
+      color:#fff; font-weight:600;
+      border:none; border-radius:6px;
+      padding: 13px 0;
+      font-size:1.1em;
+      cursor:pointer;
+      transition:background .22s, transform .15s;
+    }
+    form button:hover {
+      background:var(--accent-color);
+      transform: translateY(-1px) scale(1.03);
+    }
+    #loader, .loader-message {
+      display:none; text-align:center; color:var(--primary-color);
+      font-size:1.09em; margin-top:14px;
+    }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
+    /* WhatsApp Floating Button */
+    .whatsapp-float {
+        position: fixed; bottom: 22px; right: 22px; z-index:1000;
+        transition:filter .15s;
+    }
+    .whatsapp-float img {
+      width:52px; height:52px;
+      background:#25D366;
+      border-radius:50%; padding:9px;
+      box-shadow:0 3px 12px rgba(0,0,0,0.19);
+      transition:transform .18s, background .22s;
+    }
+    .whatsapp-float:hover img {
+      background: #128C7E;
+      transform: scale(1.13) rotate(5deg);
+    }
 
-        @keyframes expandWidth {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        /* Universal Text Selection Highlight Fix */
-        ::selection {
-            background: var(--accent-color); /* Visible background when text is selected */
-            color: var(--light-text); /* Visible text color when text is selected */
-        }
-        ::-moz-selection { /* For Firefox */
-            background: var(--accent-color);
-            color: var(--light-text);
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            color: var(--light-text);
-            padding: 40px 0; /* Adjust vertical padding */
-            animation: fadeIn 1s ease-out; /* Header fade in */
-        }
-
-        .header-content {
-            max-width: 1000px; /* Adjusted for better alignment */
-            margin: 0 auto;
-            padding: 0 25px; /* Consistent with section padding */
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start; /* Aligns content to the left */
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center; /* Vertically align logo and title */
-            gap: 15px; /* Space between logo and title */
-            margin-bottom: 10px; /* Space between logo/title and subtitle */
-        }
-
-        .company-logo {
-            height: 120px; /* Adjust size as needed, e.g., 70px, 100px, 120px */
-            width: auto; /* Maintains aspect ratio */
-            animation: fadeIn 1s ease-out 0.1s forwards; /* Logo fade in */
-            opacity: 0; /* Start hidden */
-        }
-
-        header h1 {
-            margin: 0; /* Reset margin from previous H1 styles */
-            font-size: 2.8em; /* Keep original font size */
-            text-align: left; /* Ensure title is left-aligned */
-            animation: slideInLeft 0.8s ease-out 0.2s forwards; /* Title animation from left */
-            opacity: 0; /* Start hidden */
-        }
-
-        header p {
-            font-size: 1.2em;
-            text-align: left; /* Ensure subtitle is left-aligned */
-            margin-top: 0; /* Adjust as needed, controlled by .logo-container margin-bottom */
-            animation: slideInLeft 0.8s ease-out 0.4s forwards; /* Subtitle animation from left */
-            opacity: 0; /* Start hidden */
-        }
-
-        nav {
-            background-color: var(--primary-color);
-            text-align: center;
-            padding: 10px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        nav a {
-            color: var(--light-text);
-            margin: 0 18px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease, transform 0.3s ease;
-            position: relative;
-            display: inline-block; /* Required for transform */
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background-color: var(--secondary-color);
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        nav a:hover {
-            color: var(--secondary-color);
-            transform: translateY(-2px); /* Slight lift on hover */
-        }
-
-        section {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 40px;
-            background: white; /* Sections remain white for contrast against new body background */
-            border-radius: 10px;
-            box-shadow: var(--shadow-light);
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.6s ease-out;
-        }
-
-        section.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-            text-align: center;
-            animation: slideInUp 0.7s ease-out; /* H2 animation */
-        }
-
-        h3 {
-            color: var(--accent-color);
-            margin-top: 30px;
-            margin-bottom: 15px;
-            border-left: 4px solid var(--secondary-color);
-            padding-left: 10px;
-            animation: slideInLeft 0.7s ease-out; /* H3 animation */
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        ul li {
-            background: var(--light-bg); /* List item default background (light grey) */
-            margin: 12px 0;
-            padding: 18px 25px;
-            border-left: 6px solid var(--accent-color);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-            font-size: 1.1em;
-            border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-            animation: fadeIn 0.8s ease-out forwards; /* List item fade in */
-            opacity: 0; /* Start hidden */
-        }
-
-        ul li:nth-child(even) {
-            border-left-color: var(--secondary-color); /* Alternate border color */
-        }
-
-        /* ENHANCED FIX FOR LIST ITEM HOVER */
-        ul li:hover {
-            transform: translateY(-5px); /* Lift effect on hover */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Stronger shadow on hover */
-            animation: none; /* Stop pulse on hover if it was active */
-            background-color: var(--accent-color) !important; /* Force a strong blue background on hover */
-            color: var(--light-text) !important; /* Force white text for strong contrast */
-            cursor: pointer; /* Indicate interactivity */
-        }
-        /* END ENHANCED FIX */
-
-        /* Animation delay for list items (staggered effect) */
-        #services ul li:nth-child(1) { animation-delay: 0.1s; }
-        #services ul li:nth-child(2) { animation-delay: 0.2s; }
-        #services ul li:nth-child(3) { animation-delay: 0.3s; }
-        #services ul li:nth-child(4) { animation-delay: 0.4s; }
-        #services ul li:nth-child(5) { animation-delay: 0.5s; }
-        /* Continue for other sections' lists if needed */
-
-        table {
-            width: 100%;
-            margin-top: 25px;
-            border-collapse: collapse;
-            font-size: 1em;
-            animation: fadeIn 1s ease-out; /* Table fade in */
-        }
-
-        table, th, td {
-            border: 1px solid var(--border-color);
-            padding: 12px;
-        }
-
-        th {
-            background-color: var(--primary-color);
-            color: var(--light-text);
-            animation: slideInUp 0.7s ease-out; /* Table header animation */
-        }
-
-        tr {
-            transition: background-color 0.3s ease;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #eef;
-        }
-
-        /* Defensive Rule for General Text Elements on Hover within Sections (light background) */
-        section p:hover,
-        section span:hover,
-        section strong:hover,
-        section em:hover,
-        section h1:hover, section h2:hover, section h3:hover,
-        section table td:hover {
-            color: var(--dark-text) !important; /* Forces text to remain dark */
-        }
-
-        /* Ensure links within sections have clear hover state (they are on white background) */
-        section a {
-            color: var(--accent-color); /* Default link color in sections */
-            text-decoration: underline; /* Makes them clearly links */
-        }
-        section a:hover {
-            color: var(--primary-color) !important; /* Change to a dark, distinct color on hover */
-            text-decoration: none; /* Remove underline on hover for a clean look */
-        }
-
-        /* Contact Form (General Styling, re-used by assignment and floating form) */
-        form {
-            background: white;
-            padding: 30px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            animation: slideInUp 0.8s ease-out; /* Form animation */
-        }
-
-        form input, form textarea {
-            width: 100%;
-            padding: 14px;
-            margin: 10px 0 20px 0;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 1em;
-            resize: vertical;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        form input:focus, form textarea:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-            outline: none;
-        }
-
-        form button {
-            background-color: var(--primary-color);
-            color: var(--light-text);
-            border: none;
-            padding: 14px 30px;
-            font-size: 1.05em;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            animation: pulse 1.5s infinite ease-in-out; /* Pulse effect on button */
-        }
-
-        form button:hover {
-            background-color: #081423;
-            transform: translateY(-2px) scale(1.02);
-            animation: none; /* Stop pulse on hover */
-        }
-
-        #loader, .loader-message { /* Combined loader styles */
-            display: none;
-            text-align: center;
-            margin-top: 15px;
-            color: var(--primary-color);
-            font-weight: bold;
-            font-size: 1.1em;
-            animation: fadeIn 0.5s ease-out; /* Loader fade in */
-        }
-
-        footer {
-            background-color: #081423;
-            color: var(--light-text);
-            text-align: center;
-            padding: 25px;
-            margin-top: 50px;
-            animation: fadeIn 1s ease-out; /* Footer fade in */
-        }
-
-        footer a {
-            color: #aad4ff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: var(--secondary-color);
-            text-decoration: underline;
-        }
-
-        #map iframe {
-            width: 100%;
-            height: 400px;
-            border: 0;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin-top: 30px;
-            animation: fadeIn 1s ease-out; /* Map fade in */
-        }
-
-        /* WhatsApp Floating Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 1000;
-        }
-
-        .whatsapp-float img {
-            width: 50px;
-            height: 50px;
-            background-color: #25D366;
-            padding: 10px;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            animation: pulse 2s infinite ease-in-out; /* Subtle pulse on WhatsApp button */
-        }
-
-        .whatsapp-float:hover img {
-            background-color: #128C7E;
-            transform: scale(1.1) rotate(5deg);
-            animation: none; /* Stop pulse on hover */
-        }
-
-        /* Floating Action Button (New) */
-        .floating-action-button {
-            position: fixed;
-            bottom: 90px; /* Positioned above WhatsApp button */
-            right: 25px;
-            z-index: 999; /* Below WhatsApp, above content */
-            background-color: var(--secondary-color); /* Pink color */
-            color: var(--light-text);
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 1.8em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            outline: none; /* Remove focus outline */
-        }
-
-        .floating-action-button:hover {
-            background-color: #c03a9d; /* Slightly darker pink */
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        /* Modal Styling - IMPORTANT FIXES HERE */
-        .modal {
-            display: none; /* THIS IS THE CRITICAL CHANGE: Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1001; /* Sit on top of everything */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            opacity: 0; /* Start hidden for transition */
-            transition: opacity 0.3s ease;
-        }
-
-        .modal.show {
-            opacity: 1;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            position: relative;
-            max-width: 500px; /* Max width for modal form */
-            width: 90%; /* Responsive width */
-            transform: translateY(-50px); /* Start slightly above for transition */
-            opacity: 0; /* Start hidden for transition */
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        .modal.show .modal-content {
-            transform: translateY(0); /* Slide down into place */
-            opacity: 1;
-        }
-
-        .modal-content h3 {
-            text-align: center;
-            margin-top: 0;
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        .close-button {
-            color: #aaa;
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close-button:hover,
-        .close-button:focus {
-            color: #333;
-            text-decoration: none;
-        }
-
-        /* Disable pulse animation on modal button as it's repetitive */
-        .modal-content form button {
-            animation: none;
-        }
-        .modal-content form button:hover {
-            animation: none;
-        }
-
-    </style>
+    /* Floating Action Button for Quick Contact */
+    .floating-action-button {
+      position: fixed; bottom:88px; right:22px; z-index:999;
+      background: var(--secondary-color); color: #fff;
+      border-radius:50%; width:60px; height:60px;
+      font-size:1.7em; display:flex; justify-content:center;align-items:center;
+      box-shadow: 0 4px 16px rgba(44,44,90,.15);
+      border:none; cursor:pointer;
+      transition: background .22s, transform .2s;
+    }
+    .floating-action-button:hover {
+      background: #c03a9d; transform: scale(1.09) rotate(4deg);
+    }
+    /* Modal Styles */
+    .modal {
+      display:none; position:fixed; z-index:1001; left:0; top:0;
+      width:100vw; height:100vh; background:rgba(0,0,0,0.54);
+      justify-content:center; align-items:center;
+      transition: opacity .29s;
+      opacity:0;
+    }
+    .modal.show {display:flex; opacity:1;}
+    .modal-content {
+      background:#fefefe;
+      border-radius:12px;
+      padding:35px 25px 23px 25px;
+      box-shadow: 0 7px 35px rgba(33,37,54,.16);
+      position:relative;
+      width:98vw; max-width:440px;
+      transform: translateY(-40px);
+      opacity: 0;
+      transition: transform .28s, opacity .17s;
+    }
+    .modal.show .modal-content {transform:translateY(0); opacity:1;}
+    .modal-content h3 {
+      color: var(--primary-color); text-align:center;
+      font-size:1.2em; font-weight:700; margin:0 0 17px 0;
+      border-bottom:2px solid #e6c7f3; padding-bottom:10px;
+    }
+    .close-button {
+      color:#a9a9b7;
+      position:absolute; top:9px; right:16px;
+      font-size:27px;font-weight:600;cursor:pointer;
+    }
+    .close-button:hover { color: #222349;}
+    .modal-content form button {animation:none;}
+    .modal-content form button:hover {animation:none;}
+    /* Responsive */
+    @media (max-width:700px){
+      header {padding:30px 0 20px 0;}
+      main {padding:0 3vw;}
+      section {padding:19px 5vw;}
+      .header-content{padding:0 9px;}
+      .cards {grid-template-columns:1fr;}
+    }
+    @media (max-width:450px){
+      .company-logo {height:38px;}
+      header h1 {font-size:1.3em;}
+      .header-content{ gap:3px;}
+    }
+    /* Footer */
+    footer {
+      padding:30px 0 19px 0;
+      background: #081423;
+      color: #e3e7ef;
+      text-align:center;
+      font-size:1.02em;
+      margin-top: 55px;
+    }
+    footer .footer-row {display:flex;gap:15px;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:12px;}
+    .footer-social a {
+      display:inline-block;
+      margin: 0 7px;
+      transition:transform .17s;
+      font-size: 1.4em;
+      color:#aad4ff;
+      text-decoration:none;
+    }
+    .footer-social a:hover{transform:scale(1.18); color:var(--secondary-color);}
+    footer a {color:#aad4ff;text-decoration:none;}
+    footer a:hover {color:var(--secondary-color);}
+  </style>
 </head>
 <body>
+  <header>
+    <div class="header-content">
+      <div class="logo-container">
+        <img src="images/lunex-logo.png" alt="Lunex Consult Logo" class="company-logo" />
+        <h1>Lunex Consult</h1>
+      </div>
+      <div class="slogan">Innovating Your Digital Future</div>
+    </div>
+  </header>
 
-    <header>
-        <div class="header-content">
-            <div class="logo-container">
-                <img src="images/lunex-logo.png" alt="Lunex Consult Logo" class="company-logo">
-                <h1>Lunex Consult</h1>
-            </div>
-            <p>Innovating Your Digital Future</p>
-        </div>
-    </header>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#clients">Clients</a>
+    <a href="#academics">Academics</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="cta-nav">Book a Consult</a>
+  </nav>
 
-    <nav>
-        <a href="#services">Services</a>
-        <a href="#clients">Clients</a>
-        <a href="#academics">Academics</a>
-        <a href="#contact">Contact</a>
-    </nav>
-
+  <main>
+    <!-- SERVICES -->
     <section id="services">
-        <h2>🏆 Specialized Academic Services</h2>
-
-        <h3>✏️ Coursework & Exam Prep</h3>
-        <ul>
-            <li>Personalized tutoring in computer science, business, engineering, and medical subjects</li>
-            <li>Mock exams, quiz sets, and concept reviews for better retention</li>
-            <li>One-on-one and group sessions available online</li>
-        </ul>
-
-        <h3>🧪 Research & Publication Support</h3>
-        <ul>
-            <li>Journal submission guidance and formatting (APA, MLA, IEEE)</li>
-            <li>Help with peer review responses and manuscript editing</li>
-            <li>Assistance in identifying Scopus and SCI-indexed journals</li>
-        </ul>
-
-        <h3>👨‍🎓 Career & Study Abroad Guidance</h3>
-        <ul>
-            <li>Resume and CV building for academic and professional profiles</li>
-            <li>Cover letter and LinkedIn optimization</li>
-            <li>SOP and LOR writing tailored to universities in:</li>
-            <ul>
-                <li>🇺🇸 USA — Ivy League, public universities, and community colleges</li>
-                <li>🇨🇦 Canada — Colleges, U15 group, and regional universities</li>
-                <li>🇦🇺 Australia — Group of Eight, regional institutions</li>
-                <li>🇩🇪 Germany — TU9 universities and Fachhochschulen</li>
-                <li>🇬🇧 UK — Russell Group and UCAS applications</li>
-                <li>🇸🇬 Singapore — NUS, NTU, and private institutions</li>
-                <li>🇳🇱 Netherlands — English-taught programs at top Dutch universities</li>
-            </ul>
-        </ul>
-
-        <h3>💼 Professional Services for Visa & Immigration</h3>
-        <ul>
-            <li>Resume tailoring and job application help for global markets</li>
-            <li>Support with work visas (H-1B, Tier 2, skilled migration)</li>
-            <li>Interview training and cultural orientation</li>
-        </ul>
-
-        <h3>🤝 Why Work With Us?</h3>
-        <ul>
-            <li>✅ Proven track record with students across 6 continents</li>
-            <li>✅ Affordable and transparent pricing</li>
-            <li>✅ Quick turnaround and real-time updates</li>
-            <li>✅ Confidentiality and quality guaranteed</li>
-        </ul>
+      <h2>Our Specialized Services</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon" aria-label="Coursework & Exam Prep">✏️</div>
+          <div class="card-title">Coursework & Exam Prep</div>
+          <ul>
+            <li>Personalized tutoring in CS, Business, Engineering, Medicine</li>
+            <li>Mock exams, concept reviews, group & solo sessions</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon" aria-label="Research & Publication">🧪</div>
+          <div class="card-title">Research & Publication</div>
+          <ul>
+            <li>Journal submission & format (APA/MLA/IEEE)</li>
+            <li>Peer review, editing, Scopus & SCI guidance</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon" aria-label="Career / Study Abroad">🌍</div>
+          <div class="card-title">Career & Study Abroad</div>
+          <ul>
+            <li>Resume, cover letter, LinkedIn revamp</li>
+            <li>SOP, LOR for top destinations <span class="region-flags">(🇺🇸 🇨🇦 🇦🇺 🇩🇪 🇬🇧 🇸🇬 🇳🇱)</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon" aria-label="Visa/Immigration">💼</div>
+          <div class="card-title">Visa & Immigration Support</div>
+          <ul>
+            <li>Application help: H-1B, Tier 2, Skilled Migration</li>
+            <li>Job search, interview training, orientation</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon" aria-label="Why Us">🤝</div>
+          <div class="card-title">Proven Advantage</div>
+          <ul>
+            <li>Clients over 6 continents</li>
+            <li>Affordable, confidential, quality-assured</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
-    <section id="assignment-section" style="max-width: 600px; margin: 50px auto; padding: 40px; background: white; border-radius: 10px; box-shadow: var(--shadow-light);">
-        <h2>📝 Submit Your Assignment</h2>
-        <form id="assignment-form">
-            <label for="assignment_type">Type of Assignment:</label>
-            <input type="text" id="assignment_type" name="type_of_assignment" required />
-
-            <label for="word_count">Word Count:</label>
-            <input type="number" id="word_count" name="word_count" required />
-
-            <label for="due_date">Due Date:</label>
-            <input type="date" id="due_date" name="due_date" required />
-
-            <label for="assignment_file">Upload File:</label>
-            <input type="file" id="assignment_file" required />
-
-            <button type="submit">Submit Assignment</button>
-        </form>
-    </section>
+    <!-- CLIENTS / SUCCESS -->
     <section id="clients">
-        <h2>Client Success Stories</h2>
-        <ul>
-            <li>🌍 USA: Financial Automation for a Major Bank</li>
-            <li>🇩🇪 Germany: SAP Implementation for Manufacturing</li>
-            <li>🇦🇺 Australia: Healthcare Reporting System</li>
-            <li>🇮🇳 India: Startup Scaling via BI Dashboards</li>
-        </ul>
+      <h2>Client Success & Trust</h2>
+      <div class="testimonials">
+        <div class="testimonial">
+          <img src="images/bank-logo.png" alt="Bank Logo" class="client-logo"/>
+          <div class="testimonial-text">
+            “Lunex automated vital workflows, saving us 22% in annual costs.”
+          </div>
+          <div class="testimonial-by">– Major US Bank, Financial Sector</div>
+        </div>
+        <div class="testimonial">
+          <img src="images/sap-logo.png" alt="SAP Logo" class="client-logo"/>
+          <div class="testimonial-text">
+            “SAP rollout was seamless. Their team guided from audit to go-live.”
+          </div>
+          <div class="testimonial-by">– Manufacturing Company, Germany</div>
+        </div>
+        <div class="testimonial">
+          <img src="images/healthcare-logo.png" alt="Healthcare Logo" class="client-logo"/>
+          <div class="testimonial-text">
+            “Outstanding results in tailored BI dashboards for our clinics.”
+          </div>
+          <div class="testimonial-by">– Australian Healthcare Leader</div>
+        </div>
+        <div class="testimonial">
+          <img src="images/india-logo.png" alt="Startup Logo" class="client-logo"/>
+          <div class="testimonial-text">
+            “Startup product scaled rapidly thanks to Lunex’s data insights!”
+          </div>
+          <div class="testimonial-by">– Tech Startup, India</div>
+        </div>
+      </div>
+      <!-- fallback if no logos: -->
+      <!--
+      <ul class="clients-list">
+        <li>🌍 USA: Financial Automation for Major Bank</li>
+        <li>🇩🇪 Germany: SAP Implementation</li>
+        <li>🇦🇺 Australia: Healthcare Reporting</li>
+        <li>🇮🇳 India: BI Dashboards for Scale</li>
+      </ul>
+      -->
     </section>
 
     <section id="academics">
-        <h2>🎓 Academic & Global Support Services</h2>
+      <h2>Academic & Global Support</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">📘</div>
+          <div class="card-title">Assignments & Projects</div>
+          <ul>
+            <li>University coursework, projects, data analysis, design</li>
+            <li>Plagiarism-free, citation-ready, capstones</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <div class="card-title">Dissertation & Thesis Guidance</div>
+          <ul>
+            <li>Topic selection, proposals, literature review</li>
+            <li>Data, analysis, proofreading, LaTeX, SPSS, Python</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">✈️</div>
+          <div class="card-title">Visa Application Help</div>
+          <ul>
+            <li>F-1, PGWP, Tier 4, Subclass 500, TU9 & more</li>
+            <li>SOPs, LORs, interview & document support</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fields-supported"><b>Fields supported:</b> Computer Science, Business, Engineering, Health, Social Sciences & more</div>
+      <p><b>Tools:</b> SPSS, R, Python, NVivo, LaTeX, Grammarly</p>
 
-        <h3>📘 Assignments & Projects Help</h3>
-        <ul>
-            <li>University assignments and coursework</li>
-            <li>Capstone and final-year projects</li>
-            <li>Programming, data analysis, and design tasks</li>
-            <li>Plagiarism-free content with proper citations</li>
-        </ul>
-        <p><strong>💡 Fields we support:</strong> Computer Science, Business, Engineering, Healthcare, Social Sciences, and more.</p>
-
-        <h3>📚 Dissertation & Thesis Guidance</h3>
-        <ul>
-            <li>Topic selection and proposal writing</li>
-            <li>Literature review and methodology support</li>
-            <li>Data collection, analysis, and visualization</li>
-            <li>Proofreading, formatting, and plagiarism checks</li>
-        </ul>
-        <p><strong>🧠 Tools we use:</strong> SPSS, R, Python, NVivo, LaTeX, Grammarly</p>
-
-        <h3>🌍 Visa Application Assistance</h3>
-        <p>We guide students and professionals through visa processes for top destinations:</p>
-        <table>
-            <tr><th>Country</th><th>Support Offered</th></tr>
-            <tr><td>🇺🇸 United States</td><td>F-1 visa, OPT/CPT guidance, university selection</td></tr>
-            <tr><td>🇨🇦 Canada</td><td>Study permit, PGWP, college applications</td></tr>
-            <tr><td>🇬🇧 UK</td><td>Tier 4 visa, SOP writing, CAS support</td></tr>
-            <tr><td>🇦🇺 Australia</td><td>Subclass 500 visa, GTE statement help</td></tr>
-            <tr><td>🇩🇪 Germany</td><td>Student visa, blocked account, APS certificate</td></tr>
-            <tr><td>🇳🇿 New Zealand</td><td>Visa application, university matching</td></tr>
-            <tr><td>🇮🇪 Ireland</td><td>Study visa, course selection, financial docs</td></tr>
-        </table>
-        <p>✈️ We also assist with scholarships, SOPs, LORs, and interview preparation.</p>
+      <table class="table-visa">
+        <tr><th>Country</th><th>Support Offered</th></tr>
+        <tr><td>🇺🇸 United States</td><td>F-1 visa/OPT, university selection</td></tr>
+        <tr><td>🇨🇦 Canada</td><td>Study permit, PGWP</td></tr>
+        <tr><td>🇬🇧 UK</td><td>Tier 4 visa, SOP, CAS support</td></tr>
+        <tr><td>🇦🇺 Australia</td><td>Subclass 500 visa, GTE help</td></tr>
+        <tr><td>🇩🇪 Germany</td><td>Student visa, APS, block account</td></tr>
+        <tr><td>🇳🇿 New Zealand</td><td>Visa, university match</td></tr>
+        <tr><td>🇮🇪 Ireland</td><td>Study visa, docs, course selection</td></tr>
+      </table>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact">
-        <h2>Contact Us</h2>
-        <form id="contact-form">
-            <input type="text" name="user_name" placeholder="Your Name" required />
-            <input type="email" name="user_email" placeholder="Your Email" required />
-            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-        <div id="loader">⏳ Sending message...</div>
-
-        <div id="map">
-            <h2>📍 Our Location</h2>
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3106.840244799793!2d-77.5615809236173!3d38.90372134547285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b6389762692095%3A0xc3f7a1f237ef39ce!2sBannockburn%20Ter%2C%20South%20Riding%2C%20VA%2020152!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
+      <h2>Contact Us</h2>
+      <form id="contact-form">
+        <input type="text" name="user_name" placeholder="Your Name" required />
+        <input type="email" name="user_email" placeholder="Your Email" required />
+        <textarea name="message" rows="5" placeholder="How can we help you?" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <div id="loader">⏳ Sending message...</div>
+      <div style="margin-top:32px;" id="map">
+          <h2 style="font-size:1.1em; color:#333; font-weight:600; background:none; border:none; margin-bottom:13px;margin-top:0;">📍 Our Location</h2>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3106.840244799793!2d-77.5615809236173!3d38.90372134547285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b6389762692095%3A0xc3f7a1f237ef39ce!2sBannockburn%20Ter%2C%20South%20Riding%2C%20VA%2020152!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+            style="width:100%;height:320px;border:0; border-radius:9px; box-shadow:0 2px 8px rgba(0,0,0,0.04);"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
     </section>
+  </main>
 
-    <button id="fab-contact" class="floating-action-button" title="Quick Contact">
-        💬
-    </button>
-
-    <div id="contact-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">×</span>
-            <h3>Quick Inquiry</h3>
-            <form id="floating-contact-form">
-                <input type="text" name="user_name" placeholder="Your Name" required />
-                <input type="email" name="user_email" placeholder="Your Email" required />
-                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-                <button type="submit">Send Inquiry</button>
-            </form>
-            <div id="floating-loader" class="loader-message">⏳ Sending message...</div>
-        </div>
+  <button id="fab-contact" class="floating-action-button" title="Quick Contact (Floating)">💬</button>
+  <div id="contact-modal" class="modal" aria-modal="true" role="dialog">
+    <div class="modal-content">
+      <span class="close-button" aria-label="Close">&times;</span>
+      <h3>Quick Inquiry</h3>
+      <form id="floating-contact-form">
+        <input type="text" name="user_name" placeholder="Your Name" required />
+        <input type="email" name="user_email" placeholder="Your Email" required />
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Inquiry</button>
+      </form>
+      <div id="floating-loader" class="loader-message">⏳ Sending message...</div>
     </div>
+  </div>
 
+  <!-- WhatsApp Chat Floating -->
+  <a class="whatsapp-float" href="https://wa.me/12272049578" target="_blank" title="Chat with us on WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+  </a>
 
-    <a class="whatsapp-float" href="https://wa.me/12272049578" target="_blank" title="Chat with us on WhatsApp">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-    </a>
+  <footer>
+    <div>© 2018–2025 Lunex Inc — All rights reserved.</div>
+    <div class="footer-row">
+      <div>📞 +1 (227) 204-9578</div>
+      <div>📧 <a href="mailto:prashanth@lunexconsult.com">prashanth@lunexconsult.com</a></div>
+      <div class="footer-social">
+        <a href="https://linkedin.com/company/lunexconsult" target="_blank" title="LinkedIn" aria-label="LinkedIn">
+          <span aria-hidden="true">💼</span>
+        </a>
+        <a href="https://twitter.com/lunexconsult" target="_blank" title="Twitter/X" aria-label="X/Twitter">
+          <span aria-hidden="true">🐦</span>
+        </a>
+      </div>
+    </div>
+    <div style="font-size:0.94em;opacity:.74;margin-top:9px;">Made with ❤️ for education & innovation.</div>
+  </footer>
 
-    <footer>
-        © 2018 Lunex Inc — All rights reserved.<br />
-        📞 +1 (227) 204-9578 | 📧 <a href="mailto:prashanth@lunexconsult.com" style="color: #aad4ff;">prashanth@lunexconsult.com</a>
-    </footer>
+  <!-- CONTACT FORMS & MODALS SCRIPT -->
+  <script type="module">
+    import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+    emailjs.init("cmq8Rtphvl8EkYlrh"); // Replace with your EmailJS Public Key
 
-    <script type="module">
-        // Import EmailJS as a module
-        import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-
-        // Initialize EmailJS once globally with your Public Key
-        emailjs.init("cmq8Rtphvl8EkYlrh"); // Replace with your actual EmailJS Public Key
-
-        // --- Contact Us Form (Existing) ---
-        const contactForm = document.getElementById('contact-form');
-        const contactLoader = document.getElementById('loader');
-
-        if (contactForm) { // Ensure the form exists before adding listener
-            contactForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                contactLoader.style.display = 'block';
-                contactLoader.textContent = '⏳ Sending message...';
-
-                emailjs.sendForm('service_y3ukzb9', 'template_i0nzvaj', this) // Use sendForm for standard forms
-                    .then(() => {
-                        contactLoader.textContent = '✅ Sent! Thank you.';
-                        setTimeout(() => {
-                            contactLoader.style.display = 'none';
-                            contactForm.reset();
-                        }, 3000);
-                    }, (error) => {
-                        contactLoader.textContent = '❌ Failed to send. Please try again.';
-                        console.error('EmailJS error (Contact Form):', error);
-                        setTimeout(() => {
-                            contactLoader.style.display = 'none';
-                        }, 3000);
-                    });
-            });
-        }
-
-        // --- Assignment Form (Existing, with File Upload) ---
-        const assignmentForm = document.getElementById("assignment-form");
-
-        if (assignmentForm) { // Ensure the form exists before adding listener
-            assignmentForm.addEventListener("submit", async function (e) {
-                e.preventDefault();
-
-                const fileInput = document.getElementById("assignment_file");
-                if (!fileInput.files.length) {
-                    alert("Please select a file to upload.");
-                    return;
-                }
-
-                const reader = new FileReader();
-                reader.onload = async function () {
-                    const base64File = reader.result.split(',')[1]; // Get base64 data
-                    const fileName = fileInput.files[0].name;
-
-                    const templateParams = {
-                        type_of_assignment: assignmentForm.type_of_assignment.value,
-                        word_count: assignmentForm.word_count.value,
-                        due_date: assignmentForm.due_date.value,
-                        file_data: base64File, // This variable holds the base64 content
-                        file_name: fileName    // This variable holds the original file name
-                    };
-
-                    try {
-                        // For file attachments, use emailjs.send() with templateParams
-                        await emailjs.send('service_y3ukzb9', 'template_i0nzvaj', templateParams); // IMPORTANT: Ensure this template is set up for attachments in EmailJS dashboard
-                        alert("Assignment submitted successfully!");
-                        assignmentForm.reset();
-                    } catch (error) {
-                        alert("Failed to send assignment: " + error.text);
-                        console.error("EmailJS error (Assignment Form):", error);
-                    }
-                };
-
-                reader.readAsDataURL(fileInput.files[0]); // Read file as Base64
-            });
-        }
-
-
-        // --- Floating Contact Form (New) ---
-        const fabButton = document.getElementById('fab-contact');
-        const contactModal = document.getElementById('contact-modal');
-        const closeModalButton = contactModal.querySelector('.close-button');
-        const floatingContactForm = document.getElementById('floating-contact-form');
-        const floatingLoader = document.getElementById('floating-loader');
-
-        if (fabButton && contactModal && closeModalButton && floatingContactForm && floatingLoader) { // Ensure all elements exist
-            fabButton.addEventListener('click', () => {
-                contactModal.style.display = 'flex'; // Make it visible (flex container)
-                // A small timeout to allow display change to register before opacity transition
+    // Contact Form
+    const contactForm = document.getElementById('contact-form');
+    const contactLoader = document.getElementById('loader');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        contactLoader.style.display = 'block';
+        contactLoader.textContent = '⏳ Sending message...';
+        emailjs.sendForm('service_y3ukzb9', 'template_i0nzvaj', this)
+            .then(() => {
+                contactLoader.textContent = '✅ Sent! Thank you.';
                 setTimeout(() => {
-                    contactModal.classList.add('show'); // Then transition opacity
-                }, 10); // Small delay, e.g., 10ms
+                  contactLoader.style.display = 'none';
+                  contactForm.reset();
+                }, 2900);
+            }, (error) => {
+                contactLoader.textContent = '❌ Failed to send. Please try again.';
+                setTimeout(() => {contactLoader.style.display = 'none';}, 2900);
             });
+      });
+    }
 
-            closeModalButton.addEventListener('click', () => {
-                contactModal.classList.remove('show'); // Start opacity transition
-                // After opacity transition, hide completely
-                setTimeout(() => {
-                    contactModal.style.display = 'none';
-                }, 300); // Match transition duration (0.3s)
-            });
-
-            // Close modal if user clicks outside of the modal content
-            contactModal.addEventListener('click', (event) => {
-                if (event.target === contactModal) {
-                    contactModal.classList.remove('show');
-                    setTimeout(() => {
-                        contactModal.style.display = 'none';
-                    }, 300); // Match transition duration (0.3s)
-                }
-            });
-
-            floatingContactForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                floatingLoader.style.display = 'block';
-                floatingLoader.textContent = '⏳ Sending message...';
-
-                emailjs.sendForm('service_y3ukzb9', 'template_i0nzvaj', this) // Use sendForm for standard forms
-                    .then(() => {
-                        floatingLoader.textContent = '✅ Sent! Thank you.';
-                        setTimeout(() => {
-                            floatingLoader.style.display = 'none';
-                            floatingContactForm.reset();
-                            // Close modal after successful submission
-                            contactModal.classList.remove('show');
-                            setTimeout(() => {
-                                contactModal.style.display = 'none';
-                            }, 300); // Match transition duration (0.3s)
-                        }, 3000);
-                    }, (error) => {
-                        floatingLoader.textContent = '❌ Failed to send. Please try again.';
-                        console.error('EmailJS error (Floating Form):', error);
-                        setTimeout(() => {
-                            floatingLoader.style.display = 'none';
-                        }, 3000);
-                    });
-            });
+    // Quick Inquiry Modal Logic
+    const fabButton = document.getElementById('fab-contact');
+    const contactModal = document.getElementById('contact-modal');
+    const closeModalButton = contactModal ? contactModal.querySelector('.close-button') : null;
+    const floatingContactForm = document.getElementById('floating-contact-form');
+    const floatingLoader = document.getElementById('floating-loader');
+    if (fabButton && contactModal && closeModalButton && floatingContactForm && floatingLoader) {
+      fabButton.addEventListener('click', () => {
+        contactModal.style.display = 'flex';
+        setTimeout(() => { contactModal.classList.add('show');}, 10);
+      });
+      closeModalButton.addEventListener('click', () => {
+        contactModal.classList.remove('show');
+        setTimeout(() => { contactModal.style.display = 'none'; }, 270);
+      });
+      contactModal.addEventListener('click', (event) => {
+        if (event.target === contactModal) {
+          contactModal.classList.remove('show');
+          setTimeout(() => { contactModal.style.display = 'none'; }, 250);
         }
-    </script>
+      });
+      floatingContactForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        floatingLoader.style.display = 'block';
+        floatingLoader.textContent = '⏳ Sending message...';
+        emailjs.sendForm('service_y3ukzb9', 'template_i0nzvaj', this)
+          .then(() => {
+              floatingLoader.textContent = '✅ Sent! Thank you.';
+              setTimeout(() => {
+                floatingLoader.style.display = 'none';
+                floatingContactForm.reset();
+                contactModal.classList.remove('show');
+                setTimeout(() => { contactModal.style.display = 'none'; }, 210);
+              }, 2200);
+          }, (error) => {
+              floatingLoader.textContent = '❌ Failed to send. Please try again.';
+              setTimeout(() => {floatingLoader.style.display = 'none';}, 2400);
+          });
+      });
+    }
 
-    <script>
-        const sections = document.querySelectorAll('section');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                } else {
-                    // Optional: remove 'active' to re-trigger animation when scrolling back up
-                    // entry.target.classList.remove('active');
-                }
-            });
-        }, {
-            threshold: 0.1 // Trigger when 10% of the section is visible
-        });
-        sections.forEach(section => observer.observe(section));
-    </script>
-
+  </script>
+  <script>
+    // Animate sections on scroll (fade-in effect)
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, {threshold: 0.12});
+    sections.forEach(section => observer.observe(section));
+  </script>
 </body>
 </html>
